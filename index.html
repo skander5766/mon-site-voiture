@@ -4,6 +4,14 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>APEX MOTORS — Configure Your Dream</title>
+  <script type="importmap">
+  {
+    "imports": {
+      "three":          "https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.min.js",
+      "three/addons/":  "https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/"
+    }
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
@@ -19,10 +27,12 @@
     <ul class="nav-links">
       <li><a href="#" id="navModels">Models</a></li>
       <li><a href="#" id="navConfigure">Configure</a></li>
+      <li><a href="#" id="nav3dView">3D View</a></li>
       <li><a href="#" id="navShowrooms">Showrooms</a></li>
       <li><a href="#" id="navHeritage">Heritage</a></li>
       <li><a href="#" id="navContact">Contact</a></li>
     </ul>
+    <button class="nav-cta-outline" id="navFinancing">Financing</button>
     <button class="nav-cta" id="navCta">Book Test Drive</button>
   </nav>
   <div class="nav-underline"></div>
@@ -63,6 +73,7 @@
       <div class="cta-group">
         <button class="btn-primary"   id="ctaConfig">Configure Now</button>
         <button class="btn-secondary" id="ctaFilm">Watch Film</button>
+        <button class="btn-secondary" id="ctaTestDrive">Book Test Drive</button>
       </div>
     </div>
 
@@ -101,6 +112,7 @@
       </div>
 
       <div class="config-steps-bar" id="configStepsBar"></div>
+      <div class="config-step-counter" id="configStepCounter">Step 1 of 5</div>
       <div class="config-content" id="configContent"></div>
 
       <div class="config-footer">
@@ -239,6 +251,14 @@
                 </div>
               </div>
 
+              <div class="founder-card">
+                <div class="founder-avatar">ZB</div>
+                <div class="founder-info">
+                  <div class="founder-name">Zied Bakri</div>
+                  <div class="founder-title">Co-Founder &amp; Creative Director</div>
+                </div>
+              </div>
+
             </div>
           </div>
 
@@ -261,6 +281,163 @@
       </div>
       <div class="quote-details" id="quoteDetails"></div>
       <button class="quote-done-btn" id="quoteDone">Continue Browsing</button>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       FINANCING CALCULATOR MODAL
+  ══════════════════════════════════════════ -->
+  <div id="financingOverlay" class="modal-overlay">
+    <div class="modal-backdrop" id="financingBackdrop"></div>
+    <div class="financing-modal">
+
+      <div class="contact-modal-header">
+        <div>
+          <span class="modal-label">APEX MOTORS</span>
+          <div class="modal-title-text">Financing Calculator</div>
+        </div>
+        <button class="config-close" id="financingClose" aria-label="Close">✕</button>
+      </div>
+
+      <div class="financing-body">
+
+        <div class="financing-field">
+          <label class="financing-label">Vehicle Price</label>
+          <div class="financing-value-display" id="finCarPrice">$625,000</div>
+          <div class="financing-hint">Auto-filled from current vehicle</div>
+        </div>
+
+        <div class="financing-field">
+          <label class="financing-label">Down Payment — <span id="finDownPct">20%</span></label>
+          <div class="financing-value-display" id="finDownValue">$125,000</div>
+          <input type="range" class="financing-slider" id="finDownSlider" min="10" max="80" value="20" step="5">
+          <div class="financing-slider-bounds">
+            <span>10%</span><span>80%</span>
+          </div>
+        </div>
+
+        <div class="financing-field">
+          <label class="financing-label">Loan Duration</label>
+          <div class="financing-duration-grid" id="finDurationGrid">
+            <button type="button" class="financing-duration-btn" data-months="24">24 mo</button>
+            <button type="button" class="financing-duration-btn active" data-months="36">36 mo</button>
+            <button type="button" class="financing-duration-btn" data-months="48">48 mo</button>
+            <button type="button" class="financing-duration-btn" data-months="60">60 mo</button>
+          </div>
+        </div>
+
+        <div class="financing-field">
+          <label class="financing-label">Annual Interest Rate (Fixed)</label>
+          <div class="financing-rate-row">
+            <div class="financing-rate-badge">4.9%</div>
+            <div class="financing-hint">APR — fixed for the full duration</div>
+          </div>
+        </div>
+
+        <div class="financing-result">
+          <div class="financing-monthly">
+            <div class="financing-monthly-label">Estimated Monthly Payment</div>
+            <div class="financing-monthly-value" id="finMonthly">—</div>
+            <div class="financing-monthly-sub">Principal + interest</div>
+          </div>
+          <div class="financing-breakdown">
+            <div class="financing-breakdown-row">
+              <span class="financing-breakdown-label">Vehicle Price</span>
+              <span class="financing-breakdown-value" id="finBrkPrice">—</span>
+            </div>
+            <div class="financing-breakdown-row">
+              <span class="financing-breakdown-label">Down Payment</span>
+              <span class="financing-breakdown-value" id="finBrkDown">—</span>
+            </div>
+            <div class="financing-breakdown-row">
+              <span class="financing-breakdown-label">Loan Amount</span>
+              <span class="financing-breakdown-value" id="finBrkLoan">—</span>
+            </div>
+            <div class="financing-breakdown-row">
+              <span class="financing-breakdown-label">Total Interest</span>
+              <span class="financing-breakdown-value" id="finBrkInterest">—</span>
+            </div>
+            <div class="financing-breakdown-row">
+              <span class="financing-breakdown-label">Total Cost</span>
+              <span class="financing-breakdown-value" id="finBrkTotal">—</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       TEST DRIVE MODAL
+  ══════════════════════════════════════════ -->
+  <div id="testdriveOverlay" class="modal-overlay">
+    <div class="modal-backdrop" id="testdriveBackdrop"></div>
+    <div class="testdrive-modal">
+
+      <div class="contact-modal-header">
+        <div>
+          <span class="modal-label">APEX MOTORS</span>
+          <div class="modal-title-text">Book a Test Drive</div>
+        </div>
+        <button class="config-close" id="testdriveClose" aria-label="Close">✕</button>
+      </div>
+
+      <div class="testdrive-body">
+
+        <form id="testdriveForm" novalidate>
+          <div class="form-group">
+            <label class="form-label" for="tdname">Full Name</label>
+            <input class="form-input" type="text" id="tdname" placeholder="Your full name" autocomplete="name">
+            <span class="form-error" id="tdnameErr"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tdemail">Email Address</label>
+            <input class="form-input" type="email" id="tdemail" placeholder="your@email.com" autocomplete="email">
+            <span class="form-error" id="tdemailErr"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tdphone">
+              Phone <span class="form-optional">(optional)</span>
+            </label>
+            <input class="form-input" type="tel" id="tdphone" placeholder="+33 1 45 62 78 90" autocomplete="tel">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tdcar">Preferred Vehicle</label>
+            <input class="form-input" type="text" id="tdcar" readonly style="cursor:default;opacity:.75;">
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tdshowroom">Preferred Showroom</label>
+            <select class="form-input" id="tdshowroom">
+              <option value="">Select a showroom…</option>
+              <option value="Paris">Paris, France</option>
+              <option value="Monaco">Monaco</option>
+              <option value="London">London, UK</option>
+              <option value="Milan">Milan, Italy</option>
+              <option value="Madrid">Madrid, Spain</option>
+              <option value="Dubai">Dubai, UAE</option>
+              <option value="Geneva">Geneva, Switzerland</option>
+              <option value="Amsterdam">Amsterdam, Netherlands</option>
+            </select>
+            <span class="form-error" id="tdshowroomErr"></span>
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="tddate">Preferred Date</label>
+            <input class="form-input" type="date" id="tddate">
+            <span class="form-error" id="tddateErr"></span>
+          </div>
+          <button type="submit" class="form-submit">Confirm Booking →</button>
+        </form>
+
+        <div id="testdriveSuccess" class="testdrive-success">
+          <div class="form-success-check">✓</div>
+          <div class="form-success-title">Booking Confirmed</div>
+          <div class="form-success-sub">
+            Our team will contact you within 24 hours to confirm your test drive appointment.
+          </div>
+        </div>
+
+      </div>
     </div>
   </div>
 
@@ -366,9 +543,284 @@
     </div>
   </div>
 
+  <!-- ══════════════════════════════════════════
+       3D VIEWER SECTION
+  ══════════════════════════════════════════ -->
+  <div id="viewerOverlay" class="viewer-overlay">
+
+    <!-- Three.js canvas — fills the whole overlay -->
+    <canvas id="viewerCanvas"></canvas>
+
+    <!-- Floating UI layer -->
+    <div class="viewer-ui">
+      <div class="viewer-top">
+        <div class="viewer-top-row">
+          <div>
+            <div class="viewer-top-label" id="viewerCarLabel">FERRARI SF90 STRADALE</div>
+            <div class="viewer-title">3D<em>.</em>VIEW</div>
+          </div>
+          <button class="viewer-close-btn" id="viewerClose" aria-label="Close 3D view">✕</button>
+        </div>
+        <div class="viewer-selector">
+          <button class="viewer-sel-btn active" data-car="0">FERRARI SF90</button>
+          <button class="viewer-sel-btn" data-car="1">PORSCHE 911</button>
+          <button class="viewer-sel-btn" data-car="2">BUGATTI CHIRON</button>
+          <button class="viewer-sel-btn" data-car="3">MERCEDES AMG GT</button>
+        </div>
+      </div>
+      <div class="viewer-bottom">
+        <div class="viewer-hint" id="viewerHint">
+          <span class="viewer-hint-icon">⟳</span>
+          DRAG TO EXPLORE
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading indicator -->
+    <div class="viewer-loader" id="viewerLoader">
+      <div class="viewer-loader-label">Loading 3D Model</div>
+      <div class="viewer-loader-track">
+        <div class="viewer-loader-fill" id="viewerLoaderFill"></div>
+      </div>
+    </div>
+
+  </div>
+
   <!-- ── TOAST ─────────────────────────────── -->
   <div id="toast" class="toast"></div>
 
   <script src="script.js?v=3"></script>
+
+  <!-- 3D VIEWER — ES module (deferred, runs after script.js) -->
+  <script type="module">
+  import * as THREE            from 'three';
+  import { GLTFLoader }        from 'three/addons/loaders/GLTFLoader.js';
+  import { DRACOLoader }       from 'three/addons/loaders/DRACOLoader.js';
+  import { OrbitControls }     from 'three/addons/controls/OrbitControls.js';
+
+  const CARS = [
+    { label: 'FERRARI SF90 STRADALE',  file: '2020_ferrari_sf90_stradale.glb'   },
+    { label: 'PORSCHE 911 CARRERA 4S', file: 'free_porsche_911_carrera_4s.glb'  },
+    { label: 'BUGATTI CHIRON',         file: 'bugatti_chiron_top_edition.glb'    },
+    { label: 'MERCEDES AMG GT',        file: 'mercedes_amg_gt.glb'              },
+  ];
+
+  const overlay  = document.getElementById('viewerOverlay');
+  const canvas   = document.getElementById('viewerCanvas');
+  const hintEl   = document.getElementById('viewerHint');
+  const loaderEl = document.getElementById('viewerLoader');
+  const fillEl   = document.getElementById('viewerLoaderFill');
+  const labelEl  = document.getElementById('viewerCarLabel');
+  const closeBtn = document.getElementById('viewerClose');
+  const selBtns  = document.querySelectorAll('.viewer-sel-btn');
+
+  let renderer, scene, camera, controls, animId;
+  let carModel    = null;
+  let autoRotate  = true;
+  let initialized = false;
+  let activeIdx   = 0;
+  let loading     = false;
+
+  // Shared loaders — created once at module level
+  const draco = new DRACOLoader();
+  draco.setDecoderPath('https://cdn.jsdelivr.net/npm/three@0.169.0/examples/jsm/libs/draco/');
+  const gltfLoader = new GLTFLoader();
+  gltfLoader.setDRACOLoader(draco);
+
+  /* ─── Scene setup ─────────────────────────────────── */
+  function initScene() {
+    const W = canvas.clientWidth;
+    const H = canvas.clientHeight;
+
+    renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+    renderer.setSize(W, H, false);
+    renderer.outputColorSpace    = THREE.SRGBColorSpace;
+    renderer.shadowMap.enabled   = true;
+    renderer.shadowMap.type      = THREE.PCFSoftShadowMap;
+    renderer.toneMapping         = THREE.ACESFilmicToneMapping;
+    renderer.toneMappingExposure = 1.4;
+
+    scene = new THREE.Scene();
+    scene.background = new THREE.Color(0x07070a);
+    scene.fog        = new THREE.FogExp2(0x07070a, 0.032);
+
+    camera = new THREE.PerspectiveCamera(38, W / H, 0.1, 200);
+    camera.position.set(5, 2.5, 8);
+
+    scene.add(new THREE.HemisphereLight(0xfff0e0, 0x080814, 0.7));
+
+    const key = new THREE.DirectionalLight(0xfff4e0, 3.2);
+    key.position.set(6, 10, 6);
+    key.castShadow = true;
+    key.shadow.mapSize.set(2048, 2048);
+    key.shadow.camera.near   =  0.5;
+    key.shadow.camera.far    = 40;
+    key.shadow.camera.left   = -8;
+    key.shadow.camera.right  =  8;
+    key.shadow.camera.top    =  8;
+    key.shadow.camera.bottom = -8;
+    key.shadow.bias = -0.001;
+    scene.add(key);
+
+    const fill = new THREE.DirectionalLight(0x6080ff, 1.2);
+    fill.position.set(-8, 4, 2);
+    scene.add(fill);
+
+    const rim = new THREE.DirectionalLight(0xff8040, 2.0);
+    rim.position.set(0, 5, -10);
+    scene.add(rim);
+
+    const under = new THREE.PointLight(0xff3010, 2.5, 10, 2);
+    under.position.set(0, -0.5, 0);
+    scene.add(under);
+
+    const floorMat = new THREE.MeshStandardMaterial({ color: 0x080812, roughness: 0.12, metalness: 0.95 });
+    const floor    = new THREE.Mesh(new THREE.PlaneGeometry(50, 50), floorMat);
+    floor.rotation.x = -Math.PI / 2;
+    floor.receiveShadow = true;
+    scene.add(floor);
+
+    controls = new OrbitControls(camera, canvas);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.06;
+    controls.minDistance   = 2;
+    controls.maxDistance   = 22;
+    controls.maxPolarAngle = Math.PI / 2 - 0.04;
+    controls.target.set(0, 0.8, 0);
+    controls.update();
+    controls.addEventListener('start', dismissHint);
+
+    window.addEventListener('resize', onResize);
+    animate();
+    loadCar(0);
+  }
+
+  /* ─── Dispose model ───────────────────────────────── */
+  function disposeModel(model) {
+    if (!model) return;
+    model.traverse(child => {
+      if (child.isMesh) {
+        child.geometry?.dispose();
+        if (Array.isArray(child.material)) {
+          child.material.forEach(m => m.dispose());
+        } else {
+          child.material?.dispose();
+        }
+      }
+    });
+    scene.remove(model);
+  }
+
+  /* ─── Load car by index ───────────────────────────── */
+  function loadCar(idx) {
+    if (loading || (idx === activeIdx && carModel)) return;
+    loading = true;
+
+    selBtns.forEach((btn, i) => btn.classList.toggle('active', i === idx));
+    if (labelEl) labelEl.textContent = CARS[idx].label;
+
+    loaderEl.classList.remove('viewer-loader--gone');
+    if (fillEl) fillEl.style.width = '0%';
+    const loaderLbl = loaderEl.querySelector('.viewer-loader-label');
+    if (loaderLbl) loaderLbl.textContent = 'Loading 3D Model';
+
+    disposeModel(carModel);
+    carModel = null;
+
+    gltfLoader.load(
+      CARS[idx].file,
+      gltf => {
+        activeIdx = idx;
+        loading   = false;
+        carModel  = gltf.scene;
+
+        const box    = new THREE.Box3().setFromObject(carModel);
+        const center = box.getCenter(new THREE.Vector3());
+        const size   = box.getSize(new THREE.Vector3());
+        carModel.position.x -= center.x;
+        carModel.position.z -= center.z;
+        carModel.position.y -= box.min.y;
+
+        carModel.traverse(child => {
+          if (child.isMesh) { child.castShadow = true; child.receiveShadow = true; }
+        });
+        scene.add(carModel);
+
+        const span = Math.max(size.x, size.z);
+        camera.position.set(span * 1.2, span * 0.5, span * 1.8);
+        controls.target.set(0, size.y * 0.38, 0);
+        controls.minDistance = span * 0.4;
+        controls.maxDistance = span * 5;
+        controls.update();
+
+        autoRotate = true;
+        loaderEl.classList.add('viewer-loader--gone');
+      },
+      xhr => {
+        if (xhr.total && fillEl) fillEl.style.width = (xhr.loaded / xhr.total * 100) + '%';
+      },
+      err => {
+        console.error('GLB load error:', err);
+        loading = false;
+        if (loaderLbl) loaderLbl.textContent = 'Model unavailable.';
+      }
+    );
+  }
+
+  /* ─── Hint ────────────────────────────────────────── */
+  function dismissHint() {
+    autoRotate = false;
+    hintEl.classList.add('viewer-hint--out');
+    controls.removeEventListener('start', dismissHint);
+  }
+
+  /* ─── Render loop ─────────────────────────────────── */
+  function animate() {
+    animId = requestAnimationFrame(animate);
+    if (autoRotate && carModel) carModel.rotation.y += 0.004;
+    controls.update();
+    renderer.render(scene, camera);
+  }
+
+  function onResize() {
+    if (!renderer) return;
+    const W = canvas.clientWidth, H = canvas.clientHeight;
+    camera.aspect = W / H;
+    camera.updateProjectionMatrix();
+    renderer.setSize(W, H, false);
+  }
+
+  /* ─── Open / Close ────────────────────────────────── */
+  function openViewer() {
+    overlay.classList.add('active');
+    window.viewerOpen = true;
+    if (!initialized) {
+      initialized = true;
+      setTimeout(initScene, 0);
+    } else {
+      autoRotate = true;
+      if (!animId) animate();
+    }
+  }
+
+  function closeViewer() {
+    overlay.classList.remove('active');
+    window.viewerOpen = false;
+    if (animId) { cancelAnimationFrame(animId); animId = null; }
+  }
+
+  window.openViewer  = openViewer;
+  window.closeViewer = closeViewer;
+  window.viewerOpen  = false;
+
+  closeBtn.addEventListener('click', closeViewer);
+
+  selBtns.forEach((btn, i) => {
+    btn.addEventListener('click', () => {
+      if (!loading && i !== activeIdx) loadCar(i);
+    });
+  });
+  </script>
 </body>
 </html>

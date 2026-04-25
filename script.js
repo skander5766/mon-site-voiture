@@ -169,9 +169,12 @@ let filmOpen       = false;
 let contactOpen    = false;
 let quoteOpen      = false;
 let showroomsOpen  = false;
+let financingOpen  = false;
+let testdriveOpen  = false;
 
 function anyModalOpen() {
-  return configState.open || filmOpen || contactOpen || quoteOpen || showroomsOpen;
+  return configState.open || filmOpen || contactOpen || quoteOpen || showroomsOpen || financingOpen || testdriveOpen
+    || !!window.viewerOpen;
 }
 
 /* ════════════════════════════════════════════════════
@@ -241,6 +244,12 @@ STEP_NAMES.forEach((name, i) => {
     <span class="config-step-label">${name}</span>`;
   configStepsBar.appendChild(step);
 });
+
+// Connector line overlaid behind step circles
+const stepsConn = document.createElement('div');
+stepsConn.className = 'config-steps-connector';
+stepsConn.innerHTML = '<div class="config-steps-connector-fill" id="stepsConnFill"></div>';
+configStepsBar.appendChild(stepsConn);
 
 /* ════════════════════════════════════════════════════
    PALETTE
@@ -446,6 +455,12 @@ function updateStepsBar() {
   });
   configNext.textContent = configState.step === 4 ? 'Request Quote →' : 'Continue →';
   configPrev.style.opacity = configState.step === 0 ? '0.3' : '1';
+
+  const fill = document.getElementById('stepsConnFill');
+  if (fill) fill.style.width = (configState.step / (STEP_NAMES.length - 1) * 100) + '%';
+
+  const counter = document.getElementById('configStepCounter');
+  if (counter) counter.textContent = `Step ${configState.step + 1} of ${STEP_NAMES.length}`;
 }
 
 /* ════════════════════════════════════════════════════
@@ -656,6 +671,7 @@ function renderStep4() {
     <div class="summary-cta-group">
       <button class="summary-btn-primary" id="summaryQuote">Request a Quote</button>
       <button class="summary-btn-secondary" id="summarySave">↓ Save Configuration (.txt)</button>
+      <button class="summary-btn-share" id="summaryShare">⊕ Share Configuration</button>
     </div>`;
   configContent.appendChild(wrap);
 
@@ -666,6 +682,10 @@ function renderStep4() {
 
   document.getElementById('summarySave').addEventListener('click', () => {
     downloadConfig();
+  });
+
+  document.getElementById('summaryShare').addEventListener('click', () => {
+    shareConfig();
   });
 }
 
@@ -901,11 +921,14 @@ function showToast(msg) {
    CLOSE ANY OPEN MODAL (helper for Escape / overlay click)
 ════════════════════════════════════════════════════ */
 function closeTopModal() {
-  if (configState.open) { closeConfigurator();  return; }
-  if (filmOpen)         { closeFilm();          return; }
-  if (contactOpen)      { closeContact();       return; }
-  if (quoteOpen)        { closeQuote();         return; }
-  if (showroomsOpen)    { closeShowrooms();     return; }
+  if (configState.open)    { closeConfigurator();        return; }
+  if (filmOpen)            { closeFilm();                return; }
+  if (contactOpen)         { closeContact();             return; }
+  if (quoteOpen)           { closeQuote();               return; }
+  if (showroomsOpen)       { closeShowrooms();           return; }
+  if (financingOpen)       { closeFinancing();           return; }
+  if (testdriveOpen)       { closeTestDrive();           return; }
+  if (window.viewerOpen)   { window.closeViewer?.();     return; }
 }
 
 /* ════════════════════════════════════════════════════
@@ -1050,6 +1073,11 @@ document.getElementById('navHeritage').addEventListener('click', e => {
   showToast('Heritage section — coming soon.');
 });
 
+document.getElementById('nav3dView').addEventListener('click', e => {
+  e.preventDefault();
+  if (window.openViewer) window.openViewer();
+});
+
 /* ════════════════════════════════════════════════════
    SHOWROOMS MODAL
 ════════════════════════════════════════════════════ */
@@ -1058,6 +1086,7 @@ const showroomsOverlay = document.getElementById('showroomsOverlay');
 function openShowrooms() {
   showroomsOpen = true;
   showroomsOverlay.classList.add('active');
+  initShowroomsAnimations();
 }
 
 function closeShowrooms() {
@@ -1072,3 +1101,194 @@ document.getElementById('navShowrooms').addEventListener('click', e => {
 
 document.getElementById('showroomsClose').addEventListener('click', closeShowrooms);
 document.getElementById('showroomsBackdrop').addEventListener('click', closeShowrooms);
+
+/* ════════════════════════════════════════════════════
+   SCROLL ANIMATIONS — SHOWROOMS
+════════════════════════════════════════════════════ */
+function initShowroomsAnimations() {
+  document.querySelectorAll('.showroom-card').forEach((card, i) => {
+    card.classList.remove('sr-anim');
+    card.style.animationDelay = '0ms';
+    void card.offsetWidth;
+    const delay = i * 60;
+    card.style.animationDelay = delay + 'ms';
+    card.classList.add('sr-anim');
+    setTimeout(() => {
+      card.classList.remove('sr-anim');
+      card.style.animationDelay = '';
+    }, delay + 550);
+  });
+}
+
+/* ════════════════════════════════════════════════════
+   FINANCING CALCULATOR
+════════════════════════════════════════════════════ */
+const financingOverlay = document.getElementById('financingOverlay');
+let finDuration = 36;
+
+function calcMonthly(price, downPct, months, apr) {
+  const principal = price * (1 - downPct / 100);
+  const r = apr / 100 / 12;
+  if (r === 0) return principal / months;
+  return principal * r * Math.pow(1 + r, months) / (Math.pow(1 + r, months) - 1);
+}
+
+function updateFinancingDisplay() {
+  const price    = SLIDES[current].basePrice;
+  const downPct  = parseInt(document.getElementById('finDownSlider')?.value || 20);
+  const monthly  = calcMonthly(price, downPct, finDuration, 4.9);
+  const downAmt  = price * downPct / 100;
+  const loan     = price - downAmt;
+  const totalPay = monthly * finDuration + downAmt;
+  const interest = totalPay - price;
+
+  const set = (id, val) => { const el = document.getElementById(id); if (el) el.textContent = val; };
+  set('finCarPrice',    formatPrice(price));
+  set('finDownPct',     downPct + '%');
+  set('finDownValue',   formatPrice(Math.round(downAmt)));
+  set('finMonthly',     formatPrice(Math.round(monthly)));
+  set('finBrkPrice',    formatPrice(price));
+  set('finBrkDown',     formatPrice(Math.round(downAmt)));
+  set('finBrkLoan',     formatPrice(Math.round(loan)));
+  set('finBrkInterest', formatPrice(Math.round(interest)));
+  set('finBrkTotal',    formatPrice(Math.round(totalPay)));
+}
+
+function openFinancing() {
+  financingOpen = true;
+  financingOverlay.classList.add('active');
+  updateFinancingDisplay();
+}
+
+function closeFinancing() {
+  financingOpen = false;
+  financingOverlay.classList.remove('active');
+}
+
+document.getElementById('financingClose').addEventListener('click', closeFinancing);
+document.getElementById('financingBackdrop').addEventListener('click', closeFinancing);
+document.getElementById('navFinancing').addEventListener('click', e => {
+  e.preventDefault();
+  openFinancing();
+});
+
+document.getElementById('finDownSlider').addEventListener('input', updateFinancingDisplay);
+
+document.getElementById('finDurationGrid').addEventListener('click', e => {
+  const btn = e.target.closest('.financing-duration-btn');
+  if (!btn) return;
+  finDuration = parseInt(btn.dataset.months);
+  document.querySelectorAll('.financing-duration-btn').forEach(b => b.classList.toggle('active', b === btn));
+  updateFinancingDisplay();
+});
+
+/* ════════════════════════════════════════════════════
+   TEST DRIVE MODAL
+════════════════════════════════════════════════════ */
+const testdriveOverlay = document.getElementById('testdriveOverlay');
+
+function openTestDrive() {
+  testdriveOpen = true;
+  testdriveOverlay.classList.add('active');
+  // Auto-fill car
+  const carEl = document.getElementById('tdcar');
+  if (carEl) carEl.value = SLIDES[current].lines.join(' ');
+  // Reset form
+  const form    = document.getElementById('testdriveForm');
+  const success = document.getElementById('testdriveSuccess');
+  if (form)    { form.reset(); form.style.display = ''; if (carEl) carEl.value = SLIDES[current].lines.join(' '); }
+  if (success) { success.classList.remove('show'); }
+  clearTDErrors();
+  // Set min date to tomorrow
+  const dateEl = document.getElementById('tddate');
+  if (dateEl) {
+    const tomorrow = new Date(); tomorrow.setDate(tomorrow.getDate() + 1);
+    dateEl.min = tomorrow.toISOString().split('T')[0];
+  }
+}
+
+function closeTestDrive() {
+  testdriveOpen = false;
+  testdriveOverlay.classList.remove('active');
+}
+
+function clearTDErrors() {
+  ['tdname','tdemail','tdshowroom','tddate'].forEach(id => {
+    const inp = document.getElementById(id);
+    const err = document.getElementById(id + 'Err');
+    if (inp) inp.classList.remove('error');
+    if (err) err.textContent = '';
+  });
+}
+
+function setTDError(id, msg) {
+  const inp = document.getElementById(id);
+  const err = document.getElementById(id + 'Err');
+  if (inp) inp.classList.add('error');
+  if (err) err.textContent = msg;
+}
+
+function validateTestDrive() {
+  clearTDErrors();
+  let valid = true;
+  const name     = (document.getElementById('tdname')?.value     || '').trim();
+  const email    = (document.getElementById('tdemail')?.value    || '').trim();
+  const showroom = (document.getElementById('tdshowroom')?.value || '').trim();
+  const date     = (document.getElementById('tddate')?.value     || '').trim();
+  const emailRx  = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
+
+  if (name.length < 2)      { setTDError('tdname',     'Please enter your full name.'); valid = false; }
+  if (!emailRx.test(email)) { setTDError('tdemail',    'Please enter a valid email.'); valid = false; }
+  if (!showroom)            { setTDError('tdshowroom', 'Please select a showroom.'); valid = false; }
+  if (!date)                { setTDError('tddate',     'Please select a preferred date.'); valid = false; }
+  return valid;
+}
+
+document.getElementById('testdriveClose').addEventListener('click', closeTestDrive);
+document.getElementById('testdriveBackdrop').addEventListener('click', closeTestDrive);
+document.getElementById('ctaTestDrive').addEventListener('click', openTestDrive);
+
+document.getElementById('testdriveForm').addEventListener('submit', e => {
+  e.preventDefault();
+  if (!validateTestDrive()) return;
+  document.getElementById('testdriveForm').style.display = 'none';
+  document.getElementById('testdriveSuccess').classList.add('show');
+});
+
+['tdname','tdemail','tdshowroom','tddate'].forEach(id => {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.addEventListener('change', () => {
+    el.classList.remove('error');
+    const err = document.getElementById(id + 'Err');
+    if (err) err.textContent = '';
+  });
+});
+
+/* ════════════════════════════════════════════════════
+   SHARE CONFIGURATION
+════════════════════════════════════════════════════ */
+function shareConfig() {
+  const s = SLIDES[current];
+  const params = new URLSearchParams({
+    slide:       current,
+    car:         s.lines.join('-'),
+    color:       configState.color    ?? '',
+    wheel:       configState.wheel    ?? '',
+    interior:    configState.interior ?? '',
+    performance: [...configState.performance].join(','),
+  });
+  const url = `${location.origin}${location.pathname}?${params.toString()}`;
+  if (navigator.clipboard) {
+    navigator.clipboard.writeText(url).then(() => showToast('Link copied!'));
+  } else {
+    const ta = document.createElement('textarea');
+    ta.value = url;
+    ta.style.cssText = 'position:fixed;top:-9999px';
+    document.body.appendChild(ta);
+    ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    showToast('Link copied!');
+  }
+}
