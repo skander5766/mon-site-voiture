@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CARTHA CARS — L'Excellence Automobile</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Rajdhani:wght@300;400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --gold: #C9A84C;
+      --orange: #FF6B35;
+      --orange-dim: rgba(255, 107, 53, 0.6);
+      --black: #000;
+      --navy: #050810;
+      --white: #fff;
+      --text-dim: rgba(255,255,255,0.55);
+    }
+
+    html, body {
+      width: 100%; height: 100%;
+      overflow: hidden;
+      background: #000;
+      color: #fff;
+      font-family: 'Rajdhani', sans-serif;
+    }
+
+    /* ── CANVAS PARTICLES ────────────────────────────────────── */
+    #particles {
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+    }
+
+    /* ── PARALLAX GRADIENT BACKGROUND ───────────────────────── */
+    #bg-gradient {
+      position: fixed;
+      inset: -60px;          /* oversized so parallax has room */
+      z-index: 1;
+      pointer-events: none;
+      background: radial-gradient(ellipse 120% 80% at 50% 60%, #0a0e1a 0%, #000 70%);
+      animation: bgBreath 12s ease-in-out infinite alternate;
+      will-change: transform;
+      transition: transform 0.12s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    @keyframes bgBreath {
+      0%   { background-position: 50% 40%; opacity: 0.9; }
+      100% { background-position: 52% 58%; opacity: 1; }
+    }
+
+    /* ── INTRO SCREEN ────────────────────────────────────────── */
+    #intro {
+      position: fixed;
+      inset: 0;
+      z-index: 100;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      background: #000;
+      transition: opacity 1.2s ease, visibility 1.2s ease;
+    }
+    #intro.fade-out {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+    }
+
+    /* Logo */
+    #intro-logo {
+      width: 130px;
+      height: 130px;
+      object-fit: contain;
+      opacity: 0;
+      filter: drop-shadow(0 0 0px transparent);
+      transform: scale(0.7);
+      animation:
+        logoFadeIn   0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.5s  forwards,
+        logoPulse    0.6s cubic-bezier(0.22, 1, 0.36, 1) 1.1s  forwards,
+        logoGlow     2.4s ease-in-out                    1.6s  infinite alternate;
+    }
+    @keyframes logoFadeIn {
+      to { opacity: 1; transform: scale(1.1); filter: drop-shadow(0 0 22px #C9A84C) drop-shadow(0 0 8px rgba(255,107,53,0.5)); }
+    }
+    @keyframes logoPulse {
+      0%  { transform: scale(1.1); }
+      50% { transform: scale(1.18); }
+      100%{ transform: scale(1.0); }
+    }
+    @keyframes logoGlow {
+      from { filter: drop-shadow(0 0 18px #C9A84C) drop-shadow(0 0 6px rgba(255,107,53,0.4)); }
+      to   { filter: drop-shadow(0 0 34px #C9A84C) drop-shadow(0 0 14px rgba(255,107,53,0.7)); }
+    }
+
+    /* Title letters */
+    #intro-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(56px, 10vw, 120px);
+      letter-spacing: 0.25em;
+      color: #fff;
+      margin-top: 28px;
+      display: flex;
+      overflow: hidden;
+    }
+    #intro-title .letter {
+      display: inline-block;
+      opacity: 0;
+      transform: translateY(40px);
+      animation: letterDrop 0.55s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    #intro-title .space { display: inline-block; width: 0.35em; }
+    @keyframes letterDrop {
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Subtitle */
+    #intro-sub {
+      font-family: 'Space Mono', monospace;
+      font-size: clamp(10px, 1.6vw, 14px);
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 16px;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 2.9s;
+    }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(14px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Orange line */
+    #intro-line {
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--orange), transparent);
+      margin-top: 18px;
+      animation: lineExpand 0.9s cubic-bezier(0.22, 1, 0.36, 1) forwards 3.5s;
+    }
+    @keyframes lineExpand {
+      to { width: min(380px, 60vw); }
+    }
+
+    /* Skip hint */
+    #intro-skip {
+      position: absolute;
+      bottom: 38px;
+      right: 44px;
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.25em;
+      color: rgba(255,255,255,0.2);
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: color 0.3s;
+      animation: fadeUp 1s ease forwards 4s;
+      opacity: 0;
+    }
+    #intro-skip:hover { color: rgba(255,255,255,0.55); }
+
+    /* ── MAIN CONTENT ────────────────────────────────────────── */
+    #main {
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: 100vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 1.4s ease 0.2s, visibility 0s linear 0s;
+    }
+    #main.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    /* NAV */
+    nav {
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      z-index: 20;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 28px 52px;
+    }
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+    .nav-brand img {
+      height: 40px;
+      width: auto;
+      filter: drop-shadow(0 0 6px rgba(201,168,76,0.5));
+    }
+    .nav-brand-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 22px;
+      letter-spacing: 0.2em;
+      color: #fff;
+    }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 36px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'Space Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.3s;
+    }
+    .nav-links a:hover { color: #fff; }
+    .nav-cta-link {
+      border: 1px solid var(--orange);
+      padding: 8px 20px;
+      color: var(--orange) !important;
+      clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+      transition: background 0.3s, color 0.3s !important;
+    }
+    .nav-cta-link:hover { background: var(--orange) !important; color: #fff !important; }
+
+    /* HERO */
+    .hero {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 120px 40px 80px;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--orange);
+      margin-bottom: 24px;
+    }
+
+    .hero-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(68px, 12vw, 160px);
+      line-height: 0.9;
+      letter-spacing: 0.05em;
+      color: #fff;
+      text-shadow: 0 0 80px rgba(201,168,76,0.15);
+      margin-bottom: 32px;
+    }
+    .hero-title span {
+      display: block;
+      background: linear-gradient(135deg, #fff 30%, #C9A84C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-family: 'Rajdhani', sans-serif;
+      font-size: clamp(16px, 2vw, 20px);
+      font-weight: 300;
+      color: var(--text-dim);
+      letter-spacing: 0.08em;
+      max-width: 540px;
+      margin: 0 auto 48px;
+      line-height: 1.6;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 18px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .btn-primary {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      background: var(--orange);
+      padding: 16px 36px;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+      transition: filter 0.3s, transform 0.3s;
+    }
+    .btn-primary:hover { filter: brightness(1.15); transform: translateY(-2px); }
+    .btn-secondary {
+      font-family: 'Space Mono', monospace;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: #fff;
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.3);
+      padding: 16px 36px;
+      clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px));
+      transition: border-color 0.3s, background 0.3s, transform 0.3s;
+    }
+    .btn-secondary:hover { border-color: rgba(255,255,255,0.7); background: rgba(255,255,255,0.05); transform: translateY(-2px); }
+
+    /* STATS BAR */
+    .stats-bar {
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      display: flex;
+      align-items: stretch;
+      border-top: 1px solid rgba(255,255,255,0.06);
+      background: rgba(0,0,0,0.55);
+      backdrop-filter: blur(12px);
+    }
+    .stat-item {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 22px 16px;
+      border-right: 1px solid rgba(255,255,255,0.06);
+      gap: 4px;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 36px;
+      letter-spacing: 0.05em;
+      color: var(--orange);
+      line-height: 1;
+    }
+    .stat-label {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    /* SCROLL HINT */
+    .scroll-hint {
+      position: absolute;
+      bottom: 100px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      opacity: 0;
+      animation: fadeUp 1s ease forwards 0.5s;
+    }
+    .scroll-hint span {
+      font-family: 'Space Mono', monospace;
+      font-size: 8px;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--orange), transparent);
+      animation: scrollPulse 2s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); }
+      50% { opacity: 1; transform: scaleY(1.15); }
+    }
+
+    /* FOOTER STRIP */
+    .footer-strip {
+      position: absolute;
+      bottom: 68px;
+      left: 0; right: 0;
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      padding: 0 40px;
+      pointer-events: none;
+    }
+    .footer-item {
+      font-family: 'Space Mono', monospace;
+      font-size: 9px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.2);
+      text-align: center;
+    }
+    .footer-item strong {
+      display: block;
+      color: rgba(255,255,255,0.45);
+      font-size: 10px;
+      margin-bottom: 3px;
+    }
+
+    /* VIGNETTE */
+    .vignette {
+      position: fixed;
+      inset: 0;
+      z-index: 5;
+      pointer-events: none;
+      background: radial-gradient(ellipse 80% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.65) 100%);
+    }
+
+    /* ── RESPONSIVE ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      nav { padding: 22px 24px; }
+      .nav-links { display: none; }
+      .hero { padding: 100px 24px 140px; }
+      .stats-bar { flex-wrap: wrap; }
+      .stat-item { flex: 1 1 50%; }
+      .footer-strip { gap: 20px; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- PARTICLE CANVAS -->
+<canvas id="particles"></canvas>
+
+<!-- PARALLAX GRADIENT -->
+<div id="bg-gradient"></div>
+
+<!-- VIGNETTE -->
+<div class="vignette"></div>
+
+<!-- ══ INTRO SCREEN ══════════════════════════════════════════ -->
+<div id="intro">
+  <img id="intro-logo" src="carthacars.jpg" alt="Cartha Cars" />
+
+  <div id="intro-title" aria-label="CARTHA CARS"></div>
+
+  <p id="intro-sub">L'Excellence Automobile en Tunisie</p>
+  <div id="intro-line"></div>
+
+  <span id="intro-skip" role="button" tabindex="0">Passer →</span>
+</div>
+
+<!-- ══ MAIN CONTENT ══════════════════════════════════════════ -->
+<div id="main">
+
+  <!-- NAV -->
+  <nav>
+    <a class="nav-brand" href="index.html">
+      <img src="carthacars.jpg" alt="Cartha Cars" />
+      <span class="nav-brand-name">CARTHA CARS</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html#models">Modèles</a></li>
+      <li><a href="index.html#configurator">Configurateur</a></li>
+      <li><a href="index.html#showrooms">Showrooms</a></li>
+      <li><a href="index.html#contact" class="nav-cta-link">Contact</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <p class="hero-eyebrow">Tunisie · Excellence · Prestige</p>
+    <h1 class="hero-title">
+      <span>CARTHA</span>
+      <span>CARS</span>
+    </h1>
+    <p class="hero-sub">Des véhicules d'exception pour ceux qui refusent le compromis. Découvrez notre collection exclusive en Tunisie.</p>
+    <div class="hero-actions">
+      <a class="btn-primary" href="index.html">Découvrir les Modèles</a>
+      <a class="btn-secondary" href="index.html#contact">Réserver un Essai</a>
+    </div>
+
+    <!-- STATS BAR -->
+    <div class="stats-bar">
+      <div class="stat-item">
+        <span class="stat-num">4</span>
+        <span class="stat-label">Modèles</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">9</span>
+        <span class="stat-label">Showrooms</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">320</span>
+        <span class="stat-label">km/h max</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-num">24/7</span>
+        <span class="stat-label">Support</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER CONTACT -->
+  <div class="footer-strip">
+    <div class="footer-item">
+      <strong>Siège Tunis</strong>
+      Avenue Habib Bourguiba, Tunis 1000
+    </div>
+    <div class="footer-item">
+      <strong>Téléphone</strong>
+      +216 99 115 308
+    </div>
+    <div class="footer-item">
+      <strong>Email</strong>
+      contact@carthacars.com
+    </div>
+  </div>
+
+</div><!-- /main -->
+
+<script>
+/* ──────────────────────────────────────────────────────────────
+   PARTICLES
+────────────────────────────────────────────────────────────── */
+(function () {
+  const canvas = document.getElementById('particles');
+  const ctx    = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const COLORS = ['#C9A84C', '#FF6B35', '#e8c87a', '#d4884a', '#fff8e0'];
+  const COUNT  = 90;
+
+  function mkParticle() {
+    return {
+      x:     Math.random() * W,
+      y:     H + Math.random() * 60,
+      r:     0.5 + Math.random() * 1.8,
+      speed: 0.3 + Math.random() * 0.7,
+      drift: (Math.random() - 0.5) * 0.3,
+      alpha: 0.15 + Math.random() * 0.55,
+      color: COLORS[Math.floor(Math.random() * COLORS.length)],
+    };
+  }
+
+  for (let i = 0; i < COUNT; i++) {
+    const p = mkParticle();
+    p.y = Math.random() * H;  // start spread across screen
+    particles.push(p);
+  }
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    for (const p of particles) {
+      ctx.save();
+      ctx.globalAlpha = p.alpha;
+      ctx.shadowBlur  = 6;
+      ctx.shadowColor = p.color;
+      ctx.fillStyle   = p.color;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.restore();
+      p.y     -= p.speed;
+      p.x     += p.drift;
+      p.alpha += (Math.random() - 0.5) * 0.01;
+      p.alpha  = Math.max(0.05, Math.min(0.75, p.alpha));
+      if (p.y < -10) Object.assign(p, mkParticle());
+    }
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ──────────────────────────────────────────────────────────────
+   MOUSE PARALLAX
+────────────────────────────────────────────────────────────── */
+(function () {
+  const bg     = document.getElementById('bg-gradient');
+  let   tx = 0, ty = 0;
+  let   cx = 0, cy = 0;
+  const STRENGTH = 18;
+
+  window.addEventListener('mousemove', e => {
+    const nx = (e.clientX / window.innerWidth  - 0.5);
+    const ny = (e.clientY / window.innerHeight - 0.5);
+    tx = nx * STRENGTH;
+    ty = ny * STRENGTH;
+  });
+
+  (function lerp() {
+    cx += (tx - cx) * 0.07;
+    cy += (ty - cy) * 0.07;
+    bg.style.transform = `translate(${cx}px, ${cy}px)`;
+    requestAnimationFrame(lerp);
+  })();
+})();
+
+/* ──────────────────────────────────────────────────────────────
+   INTRO SEQUENCE — letter-by-letter title
+────────────────────────────────────────────────────────────── */
+(function () {
+  const titleEl  = document.getElementById('intro-title');
+  const introEl  = document.getElementById('intro');
+  const mainEl   = document.getElementById('main');
+  const skipBtn  = document.getElementById('intro-skip');
+
+  const WORD     = 'CARTHA CARS';
+  const BASE_DEL = 1.65; // seconds after page load before first letter
+
+  WORD.split('').forEach((ch, i) => {
+    if (ch === ' ') {
+      const sp = document.createElement('span');
+      sp.className = 'space';
+      titleEl.appendChild(sp);
+    } else {
+      const span = document.createElement('span');
+      span.className = 'letter';
+      span.textContent = ch;
+      const delay = BASE_DEL + i * 0.09;
+      span.style.animationDelay = `${delay}s`;
+      titleEl.appendChild(span);
+    }
+  });
+
+  const INTRO_DURATION = 5200; // ms — total intro before auto-transition
+
+  function showMain() {
+    introEl.classList.add('fade-out');
+    setTimeout(() => {
+      mainEl.classList.add('visible');
+      document.body.style.overflow = 'hidden';
+    }, 400);
+  }
+
+  const introTimer = setTimeout(showMain, INTRO_DURATION);
+
+  skipBtn.addEventListener('click', () => {
+    clearTimeout(introTimer);
+    showMain();
+  });
+  skipBtn.addEventListener('keydown', e => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      clearTimeout(introTimer);
+      showMain();
+    }
+  });
+})();
+</script>
+</body>
+</html>

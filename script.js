@@ -5,15 +5,15 @@ const SLIDES = [
   {
     img:      'https://images.unsplash.com/photo-1592198084033-aade902d1aae?auto=format&fit=crop&w=1920&q=80',
     fallback: '#1a0400',
-    badge:    'Available Now',
+    badge:    'Disponible Maintenant',
     brand:    'FERRARI',
     lines:    ['FERRARI', 'SF90', 'STRADALE'],
-    subtitle: 'The pinnacle of Ferrari engineering. 986 hp hybrid hypercar that redefines the boundary between road car and race car.',
+    subtitle: 'Le summum de l\'ingénierie Ferrari. 986 ch en hybride, cette hypercar repousse les limites entre voiture de route et voiture de course.',
     stats: [
-      { name: 'Top Speed', value: '340',   unit: 'km/h' },
+      { name: 'Vitesse max', value: '340',   unit: 'km/h' },
       { name: '0 – 100',   value: '2.5',   unit: 'sec'  },
-      { name: 'Power',     value: '986',   unit: 'hp'   },
-      { name: 'Weight',    value: '1,570', unit: 'kg'   },
+      { name: 'Puissance',     value: '986',   unit: 'hp'   },
+      { name: 'Poids',    value: '1,570', unit: 'kg'   },
     ],
     basePrice: 625000,
     accent:  '#FF2D20',
@@ -33,15 +33,15 @@ const SLIDES = [
   {
     img:      'https://images.unsplash.com/photo-1544636331-e26879cd4d9b?auto=format&fit=crop&w=1920&q=80',
     fallback: '#00060f',
-    badge:    'Hyper Exclusive',
+    badge:    'Hyper Exclusif',
     brand:    'BUGATTI',
     lines:    ['BUGATTI', 'CHIRON', 'SPORT'],
-    subtitle: 'The Chiron is the most powerful, fastest and exclusive production super sports car in BUGATTI\'s brand history.',
+    subtitle: 'La Chiron est la super sportive de série la plus puissante, la plus rapide et la plus exclusive de l\'histoire de BUGATTI.',
     stats: [
-      { name: 'Top Speed', value: '420',   unit: 'km/h' },
+      { name: 'Vitesse max', value: '420',   unit: 'km/h' },
       { name: '0 – 100',   value: '2.4',   unit: 'sec'  },
-      { name: 'Power',     value: '1,500', unit: 'hp'   },
-      { name: 'Weight',    value: '1,995', unit: 'kg'   },
+      { name: 'Puissance',     value: '1,500', unit: 'hp'   },
+      { name: 'Poids',    value: '1,995', unit: 'kg'   },
     ],
     basePrice: 3200000,
     accent:  '#FF6B00',
@@ -60,15 +60,15 @@ const SLIDES = [
   {
     img:      'https://images.unsplash.com/photo-1503376780353-7e6692767b70?auto=format&fit=crop&w=1920&q=80',
     fallback: '#0d0d0d',
-    badge:    'Collector\'s Choice',
+    badge:    'Choix du Collectionneur',
     brand:    'PORSCHE',
     lines:    ['PORSCHE', '911 GT3', 'RS 4.0'],
-    subtitle: 'A 4.0L flat-six screaming to 9,000 rpm. The most celebrated road-going race car in history, aerodynamically perfected.',
+    subtitle: 'Un flat-six 4,0 L hurlant à 9 000 tr/min. La voiture de course routière la plus emblématique de l\'histoire, perfectionnée aérodynamiquement.',
     stats: [
-      { name: 'Top Speed', value: '296',   unit: 'km/h' },
+      { name: 'Vitesse max', value: '296',   unit: 'km/h' },
       { name: '0 – 100',   value: '3.2',   unit: 'sec'  },
-      { name: 'Power',     value: '518',   unit: 'hp'   },
-      { name: 'Weight',    value: '1,450', unit: 'kg'   },
+      { name: 'Puissance',     value: '518',   unit: 'hp'   },
+      { name: 'Poids',    value: '1,450', unit: 'kg'   },
     ],
     basePrice: 225250,
     accent:  '#C0C0C0',
@@ -87,15 +87,15 @@ const SLIDES = [
   {
     img:      'https://images.unsplash.com/photo-1618843479313-40f8afb4b4d8?auto=format&fit=crop&w=1920&q=80',
     fallback: '#060608',
-    badge:    'Track Weapon',
+    badge:    'Arme de Piste',
     brand:    'MERCEDES-AMG',
     lines:    ['AMG GT', 'BLACK', 'SERIES'],
-    subtitle: 'The most powerful AMG road car ever built. 730 hp of twin-turbocharged fury, engineered for those who demand absolute performance.',
+    subtitle: 'La voiture de route AMG la plus puissante jamais construite. 730 ch de fureur bi-turbo, conçue pour ceux qui exigent la performance absolue.',
     stats: [
-      { name: 'Top Speed', value: '325',   unit: 'km/h' },
+      { name: 'Vitesse max', value: '325',   unit: 'km/h' },
       { name: '0 – 100',   value: '3.2',   unit: 'sec'  },
-      { name: 'Power',     value: '730',   unit: 'hp'   },
-      { name: 'Weight',    value: '1,625', unit: 'kg'   },
+      { name: 'Puissance',     value: '730',   unit: 'hp'   },
+      { name: 'Poids',    value: '1,625', unit: 'kg'   },
     ],
     basePrice: 325000,
     accent:  '#00B4FF',
@@ -113,37 +113,37 @@ const SLIDES = [
   },
 ];
 
-const STEP_NAMES = ['Exterior', 'Wheels', 'Interior', 'Performance', 'Summary'];
+const STEP_NAMES = ['Extérieur', 'Jantes', 'Intérieur', 'Performance', 'Récapitulatif'];
 
 const WHEEL_OPTIONS = [
-  { name: 'Standard Forged',     desc: '20" lightweight forged alloy wheels',           price: 0,    spokes: 5  },
-  { name: 'Sport Aero',          desc: '21" aerodynamic sport alloy, low-drag profile', price: 3500, spokes: 10 },
-  { name: 'Carbon Fiber Forged', desc: '21" ultra-light carbon fiber forged, −7 kg',   price: 8900, spokes: 3  },
+  { name: 'Forgé Standard',  desc: 'Jantes forgées légères 20" en alliage',              price: 0,    spokes: 5  },
+  { name: 'Sport Aéro',      desc: 'Alliage sport aérodynamique 21", profil anti-traînée', price: 3500, spokes: 10 },
+  { name: 'Forgé Carbone',   desc: 'Forgé carbone ultra-léger 21", −7 kg',               price: 8900, spokes: 3  },
 ];
 
 const INTERIOR_OPTIONS = [
-  { name: 'Sport Interior', icon: '🏁', desc: 'Alcantara sport seats, carbon fibre trim, sport steering wheel, red stitching', price: 0    },
-  { name: 'Luxury Package', icon: '✦',  desc: 'Full Nappa leather, wood inlays, heated massage seats, ambient lighting system', price: 4200 },
-  { name: 'Racing Spec',    icon: '⬡',  desc: 'FIA-ready roll cage prep, 6-point harness mounts, carbon bucket racing seats',  price: 7800 },
+  { name: 'Intérieur Sport', icon: '🏁', desc: 'Sièges sport Alcantara, garnitures carbone, volant sport, coutures rouges', price: 0    },
+  { name: 'Pack Luxe',       icon: '✦',  desc: 'Cuir Nappa intégral, incrustations bois, sièges massants chauffants, éclairage ambiant', price: 4200 },
+  { name: 'Spec Racing',     icon: '⬡',  desc: 'Préparation arceau FIA, fixations harnais 6 points, baquets racing carbone', price: 7800 },
 ];
 
 const PERF_OPTIONS = [
-  { name: 'Launch Control System',    desc: 'Optimised standing-start acceleration sequence',       price: 2100 },
-  { name: 'Ceramic Composite Brakes', desc: 'Carbon-ceramic discs with 6-piston calipers, −18 kg', price: 6500 },
-  { name: 'Titanium Exhaust System',  desc: 'Akrapovič titanium sport exhaust system, −7 kg',       price: 4300 },
+  { name: 'Système Launch Control',    desc: 'Séquence de départ arrêté optimisée',                     price: 2100 },
+  { name: 'Freins Céramique Composite', desc: 'Disques carbone-céramique, étriers 6 pistons, −18 kg',  price: 6500 },
+  { name: 'Échappement Titane',        desc: 'Échappement sport titane Akrapovič, −7 kg',               price: 4300 },
 ];
 
 const TICKER_ITEMS = [
-  { label: 'Ferrari SF90 Stradale',        val: '986 HP'    },
-  { label: 'Bugatti Chiron Sport',          val: '1,500 HP'  },
-  { label: 'Porsche 911 GT3 RS 4.0',       val: '518 HP'    },
-  { label: 'Mercedes-AMG GT Black Series', val: '730 HP'    },
-  { label: 'New Configurations Available', val: 'Build Now' },
-  { label: 'Book a Test Drive',            val: 'Paris HQ'  },
-  { label: 'Fastest 0–100',               val: '2.4 sec'   },
-  { label: 'Top Speed Record',             val: '420 km/h'  },
-  { label: 'Carbon Ceramic Brakes',        val: '+$6,500'   },
-  { label: 'Titanium Exhaust',             val: '+$4,300'   },
+  { label: 'Ferrari SF90 Stradale',              val: '986 CH'    },
+  { label: 'Bugatti Chiron Sport',               val: '1 500 CH'  },
+  { label: 'Porsche 911 GT3 RS 4.0',            val: '518 CH'    },
+  { label: 'Mercedes-AMG GT Black Series',       val: '730 CH'    },
+  { label: 'Nouvelles Configurations Disponibles', val: 'Configurer' },
+  { label: 'Réserver un Essai',                  val: 'Tunis HQ'  },
+  { label: 'Meilleur 0–100',                    val: '2,4 sec'   },
+  { label: 'Record de Vitesse Max',              val: '420 km/h'  },
+  { label: 'Freins Céramique Carbone',           val: '+$6 500'   },
+  { label: 'Échappement Titane',                 val: '+$4 300'   },
 ];
 
 /* ════════════════════════════════════════════════════
@@ -453,14 +453,14 @@ function updateStepsBar() {
     el.classList.toggle('active', i === configState.step);
     el.classList.toggle('done',   i <  configState.step);
   });
-  configNext.textContent = configState.step === 4 ? 'Request Quote →' : 'Continue →';
+  configNext.textContent = configState.step === 4 ? 'Demander un Devis →' : 'Continuer →';
   configPrev.style.opacity = configState.step === 0 ? '0.3' : '1';
 
   const fill = document.getElementById('stepsConnFill');
   if (fill) fill.style.width = (configState.step / (STEP_NAMES.length - 1) * 100) + '%';
 
   const counter = document.getElementById('configStepCounter');
-  if (counter) counter.textContent = `Step ${configState.step + 1} of ${STEP_NAMES.length}`;
+  if (counter) counter.textContent = `Étape ${configState.step + 1} sur ${STEP_NAMES.length}`;
 }
 
 /* ════════════════════════════════════════════════════
@@ -482,13 +482,13 @@ function renderStep0() {
   const sel = configState.color;
   const wrap = document.createElement('div');
   wrap.innerHTML = `
-    <div class="config-section-title">Exterior Color</div>
-    <div class="config-section-sub">Select your preferred exterior finish</div>
+    <div class="config-section-title">Couleur Extérieure</div>
+    <div class="config-section-sub">Sélectionnez votre finition extérieure</div>
     <div class="color-swatches" id="colorSwatches"></div>
     <div class="selected-color-name" id="selectedColorName">
-      ${sel !== null ? colors[sel].name : '— Select a color —'}
+      ${sel !== null ? colors[sel].name : '— Choisir une couleur —'}
     </div>
-    <div class="config-error" id="stepError">Please select a color to continue.</div>`;
+    <div class="config-error" id="stepError">Veuillez sélectionner une couleur pour continuer.</div>`;
   configContent.appendChild(wrap);
 
   const grid = document.getElementById('colorSwatches');
@@ -510,10 +510,10 @@ function renderStep0() {
 function renderStep1() {
   const wrap = document.createElement('div');
   wrap.innerHTML = `
-    <div class="config-section-title">Wheel Style</div>
-    <div class="config-section-sub">Choose your preferred wheel specification</div>
+    <div class="config-section-title">Type de Jantes</div>
+    <div class="config-section-sub">Choisissez votre spécification de jantes</div>
     <div class="option-cards" id="wheelCards"></div>
-    <div class="config-error" id="stepError">Please select a wheel style to continue.</div>`;
+    <div class="config-error" id="stepError">Veuillez sélectionner un type de jantes pour continuer.</div>`;
   configContent.appendChild(wrap);
 
   const container = document.getElementById('wheelCards');
@@ -526,7 +526,7 @@ function renderStep1() {
         <div class="option-card-name">${w.name}</div>
         <div class="option-card-desc">${w.desc}</div>
       </div>
-      <div class="option-card-price">${w.price === 0 ? 'Included' : '+' + formatPrice(w.price)}</div>`;
+      <div class="option-card-price">${w.price === 0 ? 'Inclus' : '+' + formatPrice(w.price)}</div>`;
     card.addEventListener('click', () => {
       configState.wheel = i;
       document.querySelectorAll('#wheelCards .option-card').forEach((el, j) => el.classList.toggle('selected', j === i));
@@ -540,10 +540,10 @@ function renderStep1() {
 function renderStep2() {
   const wrap = document.createElement('div');
   wrap.innerHTML = `
-    <div class="config-section-title">Interior Package</div>
-    <div class="config-section-sub">Define the cabin experience to match your driving style</div>
+    <div class="config-section-title">Intérieur</div>
+    <div class="config-section-sub">Définissez l'expérience habitacle selon votre style de conduite</div>
     <div class="option-cards" id="interiorCards"></div>
-    <div class="config-error" id="stepError">Please select an interior package to continue.</div>`;
+    <div class="config-error" id="stepError">Veuillez sélectionner un intérieur pour continuer.</div>`;
   configContent.appendChild(wrap);
 
   const container = document.getElementById('interiorCards');
@@ -556,7 +556,7 @@ function renderStep2() {
         <div class="option-card-name">${opt.name}</div>
         <div class="option-card-desc">${opt.desc}</div>
       </div>
-      <div class="option-card-price">${opt.price === 0 ? 'Included' : '+' + formatPrice(opt.price)}</div>`;
+      <div class="option-card-price">${opt.price === 0 ? 'Inclus' : '+' + formatPrice(opt.price)}</div>`;
     card.addEventListener('click', () => {
       configState.interior = i;
       document.querySelectorAll('#interiorCards .option-card').forEach((el, j) => el.classList.toggle('selected', j === i));
@@ -570,8 +570,8 @@ function renderStep2() {
 function renderStep3() {
   const wrap = document.createElement('div');
   wrap.innerHTML = `
-    <div class="config-section-title">Performance Pack</div>
-    <div class="config-section-sub">Optional upgrades — select any combination</div>
+    <div class="config-section-title">Pack Performance</div>
+    <div class="config-section-sub">Options supplémentaires — sélectionnez librement</div>
     <div class="perf-options" id="perfOptions"></div>`;
   configContent.appendChild(wrap);
 
@@ -612,8 +612,8 @@ function renderStep4() {
   let perfHTML = '';
   if (configState.performance.size === 0) {
     perfHTML = `<div class="summary-row">
-      <span class="summary-row-label">Performance Packs</span>
-      <span class="summary-row-value">None selected</span>
+      <span class="summary-row-label">Packs Performance</span>
+      <span class="summary-row-value">Aucune sélection</span>
     </div>`;
   } else {
     configState.performance.forEach(i => {
@@ -627,11 +627,11 @@ function renderStep4() {
 
   const wrap = document.createElement('div');
   wrap.innerHTML = `
-    <div class="config-section-title">Configuration Summary</div>
-    <div class="config-section-sub">Review your selections before requesting a quote</div>
+    <div class="config-section-title">Récapitulatif</div>
+    <div class="config-section-sub">Vérifiez vos choix avant de demander un devis</div>
 
     <div class="summary-section">
-      <div class="summary-section-title">Vehicle</div>
+      <div class="summary-section-title">Véhicule</div>
       <div class="summary-row">
         <span class="summary-row-label">${s.lines.join(' ')}</span>
         <span class="summary-row-value">${formatPrice(s.basePrice)}</span>
@@ -639,22 +639,22 @@ function renderStep4() {
     </div>
 
     <div class="summary-section">
-      <div class="summary-section-title">Exterior</div>
+      <div class="summary-section-title">Extérieur</div>
       <div class="summary-row">
-        <span class="summary-row-label">Color: ${color}</span>
-        <span class="summary-row-value">Included</span>
+        <span class="summary-row-label">Couleur : ${color}</span>
+        <span class="summary-row-value">Inclus</span>
       </div>
       <div class="summary-row">
-        <span class="summary-row-label">Wheels: ${wheel}</span>
-        <span class="summary-row-value ${wheelPx > 0 ? 'accent' : ''}">${wheelPx > 0 ? '+' + formatPrice(wheelPx) : 'Included'}</span>
+        <span class="summary-row-label">Jantes : ${wheel}</span>
+        <span class="summary-row-value ${wheelPx > 0 ? 'accent' : ''}">${wheelPx > 0 ? '+' + formatPrice(wheelPx) : 'Inclus'}</span>
       </div>
     </div>
 
     <div class="summary-section">
-      <div class="summary-section-title">Interior</div>
+      <div class="summary-section-title">Intérieur</div>
       <div class="summary-row">
         <span class="summary-row-label">${interior}</span>
-        <span class="summary-row-value ${intPx > 0 ? 'accent' : ''}">${intPx > 0 ? '+' + formatPrice(intPx) : 'Included'}</span>
+        <span class="summary-row-value ${intPx > 0 ? 'accent' : ''}">${intPx > 0 ? '+' + formatPrice(intPx) : 'Inclus'}</span>
       </div>
     </div>
 
@@ -669,9 +669,9 @@ function renderStep4() {
     </div>
 
     <div class="summary-cta-group">
-      <button class="summary-btn-primary" id="summaryQuote">Request a Quote</button>
-      <button class="summary-btn-secondary" id="summarySave">↓ Save Configuration (.txt)</button>
-      <button class="summary-btn-share" id="summaryShare">⊕ Share Configuration</button>
+      <button class="summary-btn-primary" id="summaryQuote">Demander un Devis</button>
+      <button class="summary-btn-secondary" id="summarySave">↓ Sauvegarder (.txt)</button>
+      <button class="summary-btn-share" id="summaryShare">⊕ Partager</button>
     </div>`;
   configContent.appendChild(wrap);
 
@@ -783,15 +783,15 @@ function validateContactForm() {
   const emailRx = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
   if (name.length < 2) {
-    setFieldError('fname', 'Please enter your full name (min. 2 characters).');
+    setFieldError('fname', 'Veuillez saisir votre nom complet (min. 2 caractères).');
     valid = false;
   }
   if (!emailRx.test(email)) {
-    setFieldError('femail', 'Please enter a valid email address.');
+    setFieldError('femail', 'Veuillez saisir une adresse e-mail valide.');
     valid = false;
   }
   if (message.length < 10) {
-    setFieldError('fmessage', 'Message must be at least 10 characters.');
+    setFieldError('fmessage', 'Le message doit contenir au moins 10 caractères.');
     valid = false;
   }
   return valid;
@@ -802,19 +802,19 @@ function validateContactForm() {
 ════════════════════════════════════════════════════ */
 function openQuote() {
   const s        = SLIDES[current];
-  const color    = configState.color    !== null ? s.colors[configState.color].name : 'Not selected';
-  const wheel    = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].name : 'Not selected';
-  const interior = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].name : 'Not selected';
+  const color    = configState.color    !== null ? s.colors[configState.color].name : 'Non sélectionné';
+  const wheel    = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].name : 'Non sélectionné';
+  const interior = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].name : 'Non sélectionné';
   const perfList = configState.performance.size > 0
     ? [...configState.performance].map(i => PERF_OPTIONS[i].name).join(', ')
-    : 'None';
+    : 'Aucune';
   const total = calcTotal();
 
   const rows = [
-    { label: 'Vehicle',     value: s.lines.join(' ')      },
-    { label: 'Color',       value: color                  },
-    { label: 'Wheels',      value: wheel                  },
-    { label: 'Interior',    value: interior               },
+    { label: 'Véhicule',    value: s.lines.join(' ')      },
+    { label: 'Couleur',     value: color                  },
+    { label: 'Jantes',      value: wheel                  },
+    { label: 'Intérieur',   value: interior               },
     { label: 'Performance', value: perfList               },
     { label: 'Total',       value: formatPrice(total), accent: true },
   ];
@@ -839,46 +839,46 @@ function closeQuote() {
 ════════════════════════════════════════════════════ */
 function downloadConfig() {
   const s        = SLIDES[current];
-  const color    = configState.color    !== null ? s.colors[configState.color].name : 'Not selected';
-  const wheel    = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].name : 'Not selected';
+  const color    = configState.color    !== null ? s.colors[configState.color].name : 'Non sélectionné';
+  const wheel    = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].name : 'Non sélectionné';
   const wheelPx  = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].price : 0;
-  const interior = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].name : 'Not selected';
+  const interior = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].name : 'Non sélectionné';
   const intPx    = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].price : 0;
   const perfLines = configState.performance.size > 0
     ? [...configState.performance].map(i => `  • ${PERF_OPTIONS[i].name}  (+${formatPrice(PERF_OPTIONS[i].price)})`).join('\n')
-    : '  None selected';
+    : '  Aucune sélection';
   const total = calcTotal();
 
   const txt = `
 ╔══════════════════════════════════════════════════╗
-║              APEX MOTORS                         ║
-║          Configuration Summary                   ║
+║            CARTHA CARS                           ║
+║          Récapitulatif de Configuration          ║
 ╚══════════════════════════════════════════════════╝
 
-  Generated : ${new Date().toLocaleString('en-GB')}
-  Reference : APEX-${Date.now().toString(36).toUpperCase()}
+  Généré le  : ${new Date().toLocaleString('fr-FR')}
+  Référence  : CARTHA-${Date.now().toString(36).toUpperCase()}
 
 ──────────────────────────────────────────────────
-  VEHICLE
+  VÉHICULE
 ──────────────────────────────────────────────────
   ${s.lines.join(' ')}
-  Engine    : ${s.stats.find(x => x.name === 'Power')?.value} ${s.stats.find(x => x.name === 'Power')?.unit}
-  Top Speed : ${s.stats.find(x => x.name === 'Top Speed')?.value} ${s.stats.find(x => x.name === 'Top Speed')?.unit}
-  Base Price: ${formatPrice(s.basePrice)}
+  Moteur      : ${s.stats.find(x => x.name === 'Puissance')?.value} ${s.stats.find(x => x.name === 'Puissance')?.unit}
+  Vitesse max : ${s.stats.find(x => x.name === 'Vitesse max')?.value} ${s.stats.find(x => x.name === 'Vitesse max')?.unit}
+  Prix de base: ${formatPrice(s.basePrice)}
 
 ──────────────────────────────────────────────────
-  EXTERIOR
+  EXTÉRIEUR
 ──────────────────────────────────────────────────
-  Color  : ${color}
-  Wheels : ${wheel}${wheelPx > 0 ? `  (+${formatPrice(wheelPx)})` : '  (Included)'}
+  Couleur : ${color}
+  Jantes  : ${wheel}${wheelPx > 0 ? `  (+${formatPrice(wheelPx)})` : '  (Inclus)'}
 
 ──────────────────────────────────────────────────
-  INTERIOR PACKAGE
+  INTÉRIEUR
 ──────────────────────────────────────────────────
-  ${interior}${intPx > 0 ? `  (+${formatPrice(intPx)})` : '  (Included)'}
+  ${interior}${intPx > 0 ? `  (+${formatPrice(intPx)})` : '  (Inclus)'}
 
 ──────────────────────────────────────────────────
-  PERFORMANCE OPTIONS
+  OPTIONS PERFORMANCE
 ──────────────────────────────────────────────────
 ${perfLines}
 
@@ -886,23 +886,23 @@ ${perfLines}
   TOTAL CONFIGURATION : ${formatPrice(total)}
 ══════════════════════════════════════════════════
 
-  Contact   : contact@apexmotors.com
-  Phone     : +33 1 45 62 78 90
-  Address   : 12 Avenue de la Performance,
-              Paris 75008, France
+  Contact   : contact@carthacars.com
+  Tél.      : +216 99 115 308
+  Adresse   : Avenue Habib Bourguiba,
+              Tunis 1000, Tunisie
 `.trimStart();
 
   const blob = new Blob([txt], { type: 'text/plain;charset=utf-8' });
   const url  = URL.createObjectURL(blob);
   const a    = document.createElement('a');
   a.href     = url;
-  a.download = `APEX-${s.lines[0]}-${s.lines[1].replace(/\s/g, '-')}-Config.txt`;
+  a.download = `CARTHA-${s.lines[0]}-${s.lines[1].replace(/\s/g, '-')}-Config.txt`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 
-  showToast('Configuration downloaded as .txt file.');
+  showToast('Configuration sauvegardée en .txt.');
 }
 
 /* ════════════════════════════════════════════════════
@@ -1070,7 +1070,7 @@ document.getElementById('navModels').addEventListener('click', e => {
 
 document.getElementById('navHeritage').addEventListener('click', e => {
   e.preventDefault();
-  showToast('Heritage section — coming soon.');
+  showToast('Section Héritage — bientôt disponible.');
 });
 
 document.getElementById('nav3dView').addEventListener('click', e => {
@@ -1237,10 +1237,10 @@ function validateTestDrive() {
   const date     = (document.getElementById('tddate')?.value     || '').trim();
   const emailRx  = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 
-  if (name.length < 2)      { setTDError('tdname',     'Please enter your full name.'); valid = false; }
-  if (!emailRx.test(email)) { setTDError('tdemail',    'Please enter a valid email.'); valid = false; }
-  if (!showroom)            { setTDError('tdshowroom', 'Please select a showroom.'); valid = false; }
-  if (!date)                { setTDError('tddate',     'Please select a preferred date.'); valid = false; }
+  if (name.length < 2)      { setTDError('tdname',     'Veuillez saisir votre nom complet.'); valid = false; }
+  if (!emailRx.test(email)) { setTDError('tdemail',    'Veuillez saisir un e-mail valide.'); valid = false; }
+  if (!showroom)            { setTDError('tdshowroom', 'Veuillez sélectionner un showroom.'); valid = false; }
+  if (!date)                { setTDError('tddate',     'Veuillez sélectionner une date.'); valid = false; }
   return valid;
 }
 
@@ -1280,7 +1280,7 @@ function shareConfig() {
   });
   const url = `${location.origin}${location.pathname}?${params.toString()}`;
   if (navigator.clipboard) {
-    navigator.clipboard.writeText(url).then(() => showToast('Link copied!'));
+    navigator.clipboard.writeText(url).then(() => showToast('Lien copié !'));
   } else {
     const ta = document.createElement('textarea');
     ta.value = url;
@@ -1289,6 +1289,6 @@ function shareConfig() {
     ta.select();
     document.execCommand('copy');
     document.body.removeChild(ta);
-    showToast('Link copied!');
+    showToast('Lien copié !');
   }
 }

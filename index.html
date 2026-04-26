@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>APEX MOTORS — Configure Your Dream</title>
+  <title>CARTHA CARS — Configurez votre Rêve</title>
   <script type="importmap">
   {
     "imports": {
@@ -23,17 +23,17 @@
 
   <!-- ── NAV ───────────────────────────────── -->
   <nav>
-    <div class="nav-logo">APEX<em>.</em>MOTORS</div>
+    <div class="nav-logo"><img src="carthacars.jpg" alt="CARTHA CARS" class="nav-logo-img">CARTHA<em>.</em>CARS</div>
     <ul class="nav-links">
-      <li><a href="#" id="navModels">Models</a></li>
-      <li><a href="#" id="navConfigure">Configure</a></li>
-      <li><a href="#" id="nav3dView">3D View</a></li>
+      <li><a href="#" id="navModels">Modèles</a></li>
+      <li><a href="#" id="navConfigure">Configurer</a></li>
+      <li><a href="#" id="nav3dView">Vue 3D</a></li>
       <li><a href="#" id="navShowrooms">Showrooms</a></li>
-      <li><a href="#" id="navHeritage">Heritage</a></li>
+      <li><a href="#" id="navHeritage">Héritage</a></li>
       <li><a href="#" id="navContact">Contact</a></li>
     </ul>
-    <button class="nav-cta-outline" id="navFinancing">Financing</button>
-    <button class="nav-cta" id="navCta">Book Test Drive</button>
+    <button class="nav-cta-outline" id="navFinancing">Financement</button>
+    <button class="nav-cta" id="navCta">Essai Routier</button>
   </nav>
   <div class="nav-underline"></div>
 
@@ -62,7 +62,7 @@
     <div id="headlineBlock">
       <div class="badge">
         <div class="badge-dot"></div>
-        <span id="badgeText">Available Now</span>
+        <span id="badgeText">Disponible Maintenant</span>
       </div>
       <div class="headline">
         <span class="hl-solid"    id="hl1">FERRARI</span>
@@ -71,17 +71,17 @@
       </div>
       <p class="subtitle" id="subtitle">The pinnacle of Ferrari engineering.</p>
       <div class="cta-group">
-        <button class="btn-primary"   id="ctaConfig">Configure Now</button>
-        <button class="btn-secondary" id="ctaFilm">Watch Film</button>
-        <button class="btn-secondary" id="ctaTestDrive">Book Test Drive</button>
+        <button class="btn-primary"   id="ctaConfig">Configurer</button>
+        <button class="btn-secondary" id="ctaFilm">Voir le Film</button>
+        <button class="btn-secondary" id="ctaTestDrive">Essai Routier</button>
       </div>
     </div>
 
     <div id="statsCard">
-      <div class="stats-label">Vehicle Specs</div>
+      <div class="stats-label">Caractéristiques</div>
       <div id="statsRows"></div>
       <div class="stats-base-price">
-        <span class="stats-price-label">Starting From</span>
+        <span class="stats-price-label">À partir de</span>
         <span class="stats-price-value" id="basePrice">$625,000</span>
       </div>
     </div>
@@ -90,7 +90,7 @@
 
   <!-- ── TICKER BAR ────────────────────────── -->
   <div class="ticker-bar">
-    <div class="ticker-label">Live&nbsp;Feed</div>
+    <div class="ticker-label">En&nbsp;Direct</div>
     <div class="ticker-track">
       <div class="ticker-inner" id="tickerInner"></div>
     </div>
@@ -105,24 +105,24 @@
 
       <div class="config-header">
         <div class="config-header-info">
-          <span class="config-header-label">Configuring</span>
+          <span class="config-header-label">Configuration de</span>
           <span class="config-header-car" id="configCarName">FERRARI SF90 STRADALE</span>
         </div>
         <button class="config-close" id="configClose" aria-label="Close">✕</button>
       </div>
 
       <div class="config-steps-bar" id="configStepsBar"></div>
-      <div class="config-step-counter" id="configStepCounter">Step 1 of 5</div>
+      <div class="config-step-counter" id="configStepCounter">Étape 1 sur 5</div>
       <div class="config-content" id="configContent"></div>
 
       <div class="config-footer">
         <div class="config-price-wrap">
-          <span class="config-price-label">Total Configuration</span>
+          <span class="config-price-label">Configuration Totale</span>
           <span class="config-price-value" id="configTotalPrice">$625,000</span>
         </div>
         <div class="config-nav-buttons">
-          <button class="config-btn-prev" id="configPrev">← Back</button>
-          <button class="config-btn-next" id="configNext">Continue →</button>
+          <button class="config-btn-prev" id="configPrev">← Retour</button>
+          <button class="config-btn-next" id="configNext">Continuer →</button>
         </div>
       </div>
 
@@ -137,7 +137,7 @@
     <div style="width:min(960px,94vw); position:relative; padding-top:min(54vw,540px);">
       <iframe id="filmIframe" src="" frameborder="0"
         allow="autoplay; encrypted-media; fullscreen; picture-in-picture"
-        allowfullscreen title="APEX MOTORS Film"
+        allowfullscreen title="CARTHA CARS Film"
         style="position:absolute; inset:0; width:100%; height:100%; border:none;"></iframe>
     </div>
   </div>
@@ -152,78 +152,78 @@
 
       <div class="contact-modal-header">
         <div>
-          <span class="modal-label">APEX MOTORS</span>
-          <div class="modal-title-text">Get In Touch</div>
+          <span class="modal-label">CARTHA CARS</span>
+          <div class="modal-title-text">Nous Contacter</div>
         </div>
-        <button class="config-close" id="contactClose" aria-label="Close">✕</button>
+        <button class="config-close" id="contactClose" aria-label="Fermer">✕</button>
       </div>
 
       <div class="contact-body">
 
-        <!-- LEFT — CONTACT FORM -->
+        <!-- LEFT — FORMULAIRE DE CONTACT -->
         <div class="contact-left">
           <form id="contactForm" novalidate>
             <div class="form-group">
-              <label class="form-label" for="fname">Full Name</label>
-              <input class="form-input" type="text" id="fname" placeholder="Your full name" autocomplete="name">
+              <label class="form-label" for="fname">Nom complet</label>
+              <input class="form-input" type="text" id="fname" placeholder="Votre nom complet" autocomplete="name">
               <span class="form-error" id="fnameErr"></span>
             </div>
             <div class="form-group">
-              <label class="form-label" for="femail">Email Address</label>
-              <input class="form-input" type="email" id="femail" placeholder="your@email.com" autocomplete="email">
+              <label class="form-label" for="femail">Adresse e-mail</label>
+              <input class="form-input" type="email" id="femail" placeholder="votre@email.com" autocomplete="email">
               <span class="form-error" id="femailErr"></span>
             </div>
             <div class="form-group">
               <label class="form-label" for="fphone">
-                Phone <span class="form-optional">(optional)</span>
+                Téléphone <span class="form-optional">(optionnel)</span>
               </label>
-              <input class="form-input" type="tel" id="fphone" placeholder="+33 1 45 62 78 90" autocomplete="tel">
+              <input class="form-input" type="tel" id="fphone" placeholder="+216 99 115 308" autocomplete="tel">
             </div>
             <div class="form-group">
               <label class="form-label" for="fmessage">Message</label>
               <textarea class="form-input form-textarea" id="fmessage"
-                placeholder="Tell us about your dream configuration..." rows="4"></textarea>
+                placeholder="Parlez-nous de votre configuration idéale..." rows="4"></textarea>
               <span class="form-error" id="fmessageErr"></span>
             </div>
-            <button type="submit" class="form-submit">Send Message →</button>
+            <button type="submit" class="form-submit">Envoyer →</button>
           </form>
 
           <div id="formSuccess" class="form-success">
             <div class="form-success-check">✓</div>
-            <div class="form-success-title">Message Received</div>
+            <div class="form-success-title">Message Reçu</div>
             <div class="form-success-sub">
-              Our team will contact you within 24 hours to discuss your inquiry.
+              Notre équipe vous contactera sous 24 heures pour discuter de votre demande.
             </div>
           </div>
         </div>
 
-        <!-- RIGHT — INFO + FOUNDERS -->
+        <!-- RIGHT — INFOS + DIRECTION -->
         <div class="contact-right">
 
           <div class="contact-info-section">
             <div class="contact-info-group">
-              <div class="contact-info-label">Headquarters</div>
-              <div class="contact-info-value">12 Avenue de la Performance<br>Paris 75008, France</div>
+              <div class="contact-info-label">Siège Social</div>
+              <div class="contact-info-value">Avenue Habib Bourguiba<br>Tunis 1000, Tunisie</div>
             </div>
             <div class="contact-info-group">
-              <div class="contact-info-label">Phone</div>
-              <div class="contact-info-value">+33 1 45 62 78 90</div>
+              <div class="contact-info-label">Téléphone</div>
+              <div class="contact-info-value">+216 99 115 308</div>
             </div>
             <div class="contact-info-group">
-              <div class="contact-info-label">Email</div>
-              <div class="contact-info-value">contact@apexmotors.com</div>
+              <div class="contact-info-label">E-mail</div>
+              <div class="contact-info-value">contact@carthacars.com</div>
             </div>
           </div>
 
           <div class="founders-section">
-            <div class="founders-header">Leadership</div>
+            <div class="founders-header">Direction</div>
             <div class="founders-grid">
 
               <div class="founder-card">
                 <div class="founder-avatar">SK</div>
                 <div class="founder-info">
                   <div class="founder-name">Skander Kefi</div>
-                  <div class="founder-title">Co-Founder &amp; CEO</div>
+                  <div class="founder-title">Co-Fondateur &amp; PDG</div>
                 </div>
               </div>
 
@@ -231,7 +231,7 @@
                 <div class="founder-avatar">AB</div>
                 <div class="founder-info">
                   <div class="founder-name">Ahmed Bennour</div>
-                  <div class="founder-title">Co-Founder &amp; CTO</div>
+                  <div class="founder-title">Co-Fondateur &amp; Directeur Technique</div>
                 </div>
               </div>
 
@@ -239,7 +239,7 @@
                 <div class="founder-avatar">YJ</div>
                 <div class="founder-info">
                   <div class="founder-name">Youssef Jamoussi</div>
-                  <div class="founder-title">Co-Founder &amp; Chief Design Officer</div>
+                  <div class="founder-title">Co-Fondateur &amp; Directeur Design</div>
                 </div>
               </div>
 
@@ -247,7 +247,7 @@
                 <div class="founder-avatar">FK</div>
                 <div class="founder-info">
                   <div class="founder-name">Firas Khamessi</div>
-                  <div class="founder-title">Co-Founder &amp; Chief Revenue Officer</div>
+                  <div class="founder-title">Co-Fondateur &amp; Directeur Commercial</div>
                 </div>
               </div>
 
@@ -255,7 +255,7 @@
                 <div class="founder-avatar">ZB</div>
                 <div class="founder-info">
                   <div class="founder-name">Zied Bakri</div>
-                  <div class="founder-title">Co-Founder &amp; Creative Director</div>
+                  <div class="founder-title">Co-Fondateur &amp; Directeur Créatif</div>
                 </div>
               </div>
 
@@ -275,12 +275,12 @@
     <div class="quote-modal">
       <button class="config-close quote-close-btn" id="quoteClose" aria-label="Close">✕</button>
       <div class="quote-check">✓</div>
-      <div class="quote-title">Quote Request Submitted</div>
+      <div class="quote-title">Devis Soumis</div>
       <div class="quote-sub">
-        Our specialists will contact you within 24 hours to discuss your bespoke configuration.
+        Nos spécialistes vous contacteront sous 24 heures pour discuter de votre configuration sur mesure.
       </div>
       <div class="quote-details" id="quoteDetails"></div>
-      <button class="quote-done-btn" id="quoteDone">Continue Browsing</button>
+      <button class="quote-done-btn" id="quoteDone">Continuer</button>
     </div>
   </div>
 
@@ -293,22 +293,22 @@
 
       <div class="contact-modal-header">
         <div>
-          <span class="modal-label">APEX MOTORS</span>
-          <div class="modal-title-text">Financing Calculator</div>
+          <span class="modal-label">CARTHA CARS</span>
+          <div class="modal-title-text">Calculateur de Financement</div>
         </div>
-        <button class="config-close" id="financingClose" aria-label="Close">✕</button>
+        <button class="config-close" id="financingClose" aria-label="Fermer">✕</button>
       </div>
 
       <div class="financing-body">
 
         <div class="financing-field">
-          <label class="financing-label">Vehicle Price</label>
+          <label class="financing-label">Prix du Véhicule</label>
           <div class="financing-value-display" id="finCarPrice">$625,000</div>
-          <div class="financing-hint">Auto-filled from current vehicle</div>
+          <div class="financing-hint">Renseigné automatiquement</div>
         </div>
 
         <div class="financing-field">
-          <label class="financing-label">Down Payment — <span id="finDownPct">20%</span></label>
+          <label class="financing-label">Apport initial — <span id="finDownPct">20%</span></label>
           <div class="financing-value-display" id="finDownValue">$125,000</div>
           <input type="range" class="financing-slider" id="finDownSlider" min="10" max="80" value="20" step="5">
           <div class="financing-slider-bounds">
@@ -317,48 +317,48 @@
         </div>
 
         <div class="financing-field">
-          <label class="financing-label">Loan Duration</label>
+          <label class="financing-label">Durée du Prêt</label>
           <div class="financing-duration-grid" id="finDurationGrid">
-            <button type="button" class="financing-duration-btn" data-months="24">24 mo</button>
-            <button type="button" class="financing-duration-btn active" data-months="36">36 mo</button>
-            <button type="button" class="financing-duration-btn" data-months="48">48 mo</button>
-            <button type="button" class="financing-duration-btn" data-months="60">60 mo</button>
+            <button type="button" class="financing-duration-btn" data-months="24">24 mois</button>
+            <button type="button" class="financing-duration-btn active" data-months="36">36 mois</button>
+            <button type="button" class="financing-duration-btn" data-months="48">48 mois</button>
+            <button type="button" class="financing-duration-btn" data-months="60">60 mois</button>
           </div>
         </div>
 
         <div class="financing-field">
-          <label class="financing-label">Annual Interest Rate (Fixed)</label>
+          <label class="financing-label">Taux Annuel Fixe</label>
           <div class="financing-rate-row">
-            <div class="financing-rate-badge">4.9%</div>
-            <div class="financing-hint">APR — fixed for the full duration</div>
+            <div class="financing-rate-badge">4,9%</div>
+            <div class="financing-hint">TAEG — fixe pour toute la durée</div>
           </div>
         </div>
 
         <div class="financing-result">
           <div class="financing-monthly">
-            <div class="financing-monthly-label">Estimated Monthly Payment</div>
+            <div class="financing-monthly-label">Mensualité Estimée</div>
             <div class="financing-monthly-value" id="finMonthly">—</div>
-            <div class="financing-monthly-sub">Principal + interest</div>
+            <div class="financing-monthly-sub">Capital + intérêts</div>
           </div>
           <div class="financing-breakdown">
             <div class="financing-breakdown-row">
-              <span class="financing-breakdown-label">Vehicle Price</span>
+              <span class="financing-breakdown-label">Prix du véhicule</span>
               <span class="financing-breakdown-value" id="finBrkPrice">—</span>
             </div>
             <div class="financing-breakdown-row">
-              <span class="financing-breakdown-label">Down Payment</span>
+              <span class="financing-breakdown-label">Apport initial</span>
               <span class="financing-breakdown-value" id="finBrkDown">—</span>
             </div>
             <div class="financing-breakdown-row">
-              <span class="financing-breakdown-label">Loan Amount</span>
+              <span class="financing-breakdown-label">Montant emprunté</span>
               <span class="financing-breakdown-value" id="finBrkLoan">—</span>
             </div>
             <div class="financing-breakdown-row">
-              <span class="financing-breakdown-label">Total Interest</span>
+              <span class="financing-breakdown-label">Total des intérêts</span>
               <span class="financing-breakdown-value" id="finBrkInterest">—</span>
             </div>
             <div class="financing-breakdown-row">
-              <span class="financing-breakdown-label">Total Cost</span>
+              <span class="financing-breakdown-label">Coût total</span>
               <span class="financing-breakdown-value" id="finBrkTotal">—</span>
             </div>
           </div>
@@ -377,63 +377,64 @@
 
       <div class="contact-modal-header">
         <div>
-          <span class="modal-label">APEX MOTORS</span>
-          <div class="modal-title-text">Book a Test Drive</div>
+          <span class="modal-label">CARTHA CARS</span>
+          <div class="modal-title-text">Réserver un Essai</div>
         </div>
-        <button class="config-close" id="testdriveClose" aria-label="Close">✕</button>
+        <button class="config-close" id="testdriveClose" aria-label="Fermer">✕</button>
       </div>
 
       <div class="testdrive-body">
 
         <form id="testdriveForm" novalidate>
           <div class="form-group">
-            <label class="form-label" for="tdname">Full Name</label>
-            <input class="form-input" type="text" id="tdname" placeholder="Your full name" autocomplete="name">
+            <label class="form-label" for="tdname">Nom complet</label>
+            <input class="form-input" type="text" id="tdname" placeholder="Votre nom complet" autocomplete="name">
             <span class="form-error" id="tdnameErr"></span>
           </div>
           <div class="form-group">
-            <label class="form-label" for="tdemail">Email Address</label>
-            <input class="form-input" type="email" id="tdemail" placeholder="your@email.com" autocomplete="email">
+            <label class="form-label" for="tdemail">Adresse e-mail</label>
+            <input class="form-input" type="email" id="tdemail" placeholder="votre@email.com" autocomplete="email">
             <span class="form-error" id="tdemailErr"></span>
           </div>
           <div class="form-group">
             <label class="form-label" for="tdphone">
-              Phone <span class="form-optional">(optional)</span>
+              Téléphone <span class="form-optional">(optionnel)</span>
             </label>
-            <input class="form-input" type="tel" id="tdphone" placeholder="+33 1 45 62 78 90" autocomplete="tel">
+            <input class="form-input" type="tel" id="tdphone" placeholder="+216 99 115 308" autocomplete="tel">
           </div>
           <div class="form-group">
-            <label class="form-label" for="tdcar">Preferred Vehicle</label>
+            <label class="form-label" for="tdcar">Véhicule Souhaité</label>
             <input class="form-input" type="text" id="tdcar" readonly style="cursor:default;opacity:.75;">
           </div>
           <div class="form-group">
-            <label class="form-label" for="tdshowroom">Preferred Showroom</label>
+            <label class="form-label" for="tdshowroom">Showroom Préféré</label>
             <select class="form-input" id="tdshowroom">
-              <option value="">Select a showroom…</option>
+              <option value="">Choisir un showroom…</option>
+              <option value="Tunis">Tunis, Tunisie — Siège Principal</option>
               <option value="Paris">Paris, France</option>
               <option value="Monaco">Monaco</option>
-              <option value="London">London, UK</option>
-              <option value="Milan">Milan, Italy</option>
-              <option value="Madrid">Madrid, Spain</option>
-              <option value="Dubai">Dubai, UAE</option>
-              <option value="Geneva">Geneva, Switzerland</option>
-              <option value="Amsterdam">Amsterdam, Netherlands</option>
+              <option value="London">Londres, Royaume-Uni</option>
+              <option value="Milan">Milan, Italie</option>
+              <option value="Madrid">Madrid, Espagne</option>
+              <option value="Dubai">Dubaï, Émirats arabes unis</option>
+              <option value="Geneva">Genève, Suisse</option>
+              <option value="Amsterdam">Amsterdam, Pays-Bas</option>
             </select>
             <span class="form-error" id="tdshowroomErr"></span>
           </div>
           <div class="form-group">
-            <label class="form-label" for="tddate">Preferred Date</label>
+            <label class="form-label" for="tddate">Date Souhaitée</label>
             <input class="form-input" type="date" id="tddate">
             <span class="form-error" id="tddateErr"></span>
           </div>
-          <button type="submit" class="form-submit">Confirm Booking →</button>
+          <button type="submit" class="form-submit">Confirmer la Réservation →</button>
         </form>
 
         <div id="testdriveSuccess" class="testdrive-success">
           <div class="form-success-check">✓</div>
-          <div class="form-success-title">Booking Confirmed</div>
+          <div class="form-success-title">Réservation Confirmée</div>
           <div class="form-success-sub">
-            Our team will contact you within 24 hours to confirm your test drive appointment.
+            Notre équipe vous contactera sous 24 heures pour confirmer votre rendez-vous d'essai.
           </div>
         </div>
 
@@ -451,13 +452,24 @@
 
       <div class="showrooms-header">
         <div>
-          <span class="modal-label">Global Network</span>
-          <div class="modal-title-text">Our Showrooms</div>
+          <span class="modal-label">Réseau Mondial</span>
+          <div class="modal-title-text">Nos Showrooms</div>
         </div>
         <button class="config-close" id="showroomsClose" aria-label="Close">✕</button>
       </div>
 
       <div class="showrooms-grid">
+
+        <div class="showroom-card showroom-card--hq">
+          <div class="showroom-hq-badge">SIÈGE PRINCIPAL</div>
+          <div class="showroom-flag">🇹🇳</div>
+          <div class="showroom-city">Tunis</div>
+          <div class="showroom-country">Tunisie</div>
+          <div class="showroom-address">Avenue Habib Bourguiba, Tunis 1000</div>
+          <div class="showroom-phone">+216 99 115 308</div>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=Avenue+Habib+Bourguiba+Tunis+Tunisia" target="_blank" rel="noopener">Itinéraire →</a>
+        </div>
 
         <div class="showroom-card">
           <div class="showroom-flag">🇫🇷</div>
@@ -465,78 +477,78 @@
           <div class="showroom-country">France</div>
           <div class="showroom-address">42 Avenue des Champs-Élysées</div>
           <div class="showroom-phone">+33 1 42 56 78 90</div>
-          <div class="showroom-hours">Mon – Sat &nbsp;9:00 – 19:00</div>
-          <a class="showroom-btn" href="https://maps.google.com/?q=42+Avenue+des+Champs-Élysées+Paris" target="_blank" rel="noopener">Get Directions →</a>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=42+Avenue+des+Champs-Élysées+Paris" target="_blank" rel="noopener">Itinéraire →</a>
         </div>
 
         <div class="showroom-card">
           <div class="showroom-flag">🇲🇨</div>
           <div class="showroom-city">Monaco</div>
-          <div class="showroom-country">Principality of Monaco</div>
+          <div class="showroom-country">Principauté de Monaco</div>
           <div class="showroom-address">8 Avenue de Monte-Carlo</div>
           <div class="showroom-phone">+377 93 15 42 00</div>
-          <div class="showroom-hours">Mon – Sat &nbsp;9:00 – 19:00</div>
-          <a class="showroom-btn" href="https://maps.google.com/?q=8+Avenue+de+Monte-Carlo+Monaco" target="_blank" rel="noopener">Get Directions →</a>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=8+Avenue+de+Monte-Carlo+Monaco" target="_blank" rel="noopener">Itinéraire →</a>
         </div>
 
         <div class="showroom-card">
           <div class="showroom-flag">🇬🇧</div>
           <div class="showroom-city">London</div>
-          <div class="showroom-country">United Kingdom</div>
+          <div class="showroom-country">Royaume-Uni</div>
           <div class="showroom-address">15 Berkeley Square, Mayfair</div>
           <div class="showroom-phone">+44 20 7493 1234</div>
-          <div class="showroom-hours">Mon – Sat &nbsp;9:00 – 19:00</div>
-          <a class="showroom-btn" href="https://maps.google.com/?q=15+Berkeley+Square+Mayfair+London" target="_blank" rel="noopener">Get Directions →</a>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=15+Berkeley+Square+Mayfair+London" target="_blank" rel="noopener">Itinéraire →</a>
         </div>
 
         <div class="showroom-card">
           <div class="showroom-flag">🇮🇹</div>
           <div class="showroom-city">Milan</div>
-          <div class="showroom-country">Italy</div>
+          <div class="showroom-country">Italie</div>
           <div class="showroom-address">Via della Spiga 12</div>
           <div class="showroom-phone">+39 02 76 00 12 34</div>
-          <div class="showroom-hours">Mon – Sat &nbsp;9:00 – 19:00</div>
-          <a class="showroom-btn" href="https://maps.google.com/?q=Via+della+Spiga+12+Milan+Italy" target="_blank" rel="noopener">Get Directions →</a>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=Via+della+Spiga+12+Milan+Italy" target="_blank" rel="noopener">Itinéraire →</a>
         </div>
 
         <div class="showroom-card">
           <div class="showroom-flag">🇪🇸</div>
           <div class="showroom-city">Madrid</div>
-          <div class="showroom-country">Spain</div>
+          <div class="showroom-country">Espagne</div>
           <div class="showroom-address">Paseo de la Castellana 89</div>
           <div class="showroom-phone">+34 91 123 45 67</div>
-          <div class="showroom-hours">Mon – Sat &nbsp;9:00 – 19:00</div>
-          <a class="showroom-btn" href="https://maps.google.com/?q=Paseo+de+la+Castellana+89+Madrid" target="_blank" rel="noopener">Get Directions →</a>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=Paseo+de+la+Castellana+89+Madrid" target="_blank" rel="noopener">Itinéraire →</a>
         </div>
 
         <div class="showroom-card">
           <div class="showroom-flag">🇦🇪</div>
           <div class="showroom-city">Dubai</div>
-          <div class="showroom-country">United Arab Emirates</div>
+          <div class="showroom-country">Émirats arabes unis</div>
           <div class="showroom-address">DIFC Gate Avenue</div>
           <div class="showroom-phone">+971 4 123 4567</div>
-          <div class="showroom-hours">Mon – Sat &nbsp;9:00 – 19:00</div>
-          <a class="showroom-btn" href="https://maps.google.com/?q=DIFC+Gate+Avenue+Dubai" target="_blank" rel="noopener">Get Directions →</a>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=DIFC+Gate+Avenue+Dubai" target="_blank" rel="noopener">Itinéraire →</a>
         </div>
 
         <div class="showroom-card">
           <div class="showroom-flag">🇨🇭</div>
           <div class="showroom-city">Geneva</div>
-          <div class="showroom-country">Switzerland</div>
+          <div class="showroom-country">Suisse</div>
           <div class="showroom-address">Rue du Rhône 48</div>
           <div class="showroom-phone">+41 22 123 45 67</div>
-          <div class="showroom-hours">Mon – Sat &nbsp;9:00 – 19:00</div>
-          <a class="showroom-btn" href="https://maps.google.com/?q=Rue+du+Rhône+48+Geneva+Switzerland" target="_blank" rel="noopener">Get Directions →</a>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=Rue+du+Rhône+48+Geneva+Switzerland" target="_blank" rel="noopener">Itinéraire →</a>
         </div>
 
         <div class="showroom-card">
           <div class="showroom-flag">🇳🇱</div>
           <div class="showroom-city">Amsterdam</div>
-          <div class="showroom-country">Netherlands</div>
+          <div class="showroom-country">Pays-Bas</div>
           <div class="showroom-address">Herengracht 204</div>
           <div class="showroom-phone">+31 20 123 4567</div>
-          <div class="showroom-hours">Mon – Sat &nbsp;9:00 – 19:00</div>
-          <a class="showroom-btn" href="https://maps.google.com/?q=Herengracht+204+Amsterdam" target="_blank" rel="noopener">Get Directions →</a>
+          <div class="showroom-hours">Lun – Sam &nbsp;9h00 – 19h00</div>
+          <a class="showroom-btn" href="https://maps.google.com/?q=Herengracht+204+Amsterdam" target="_blank" rel="noopener">Itinéraire →</a>
         </div>
 
       </div>
@@ -571,14 +583,14 @@
       <div class="viewer-bottom">
         <div class="viewer-hint" id="viewerHint">
           <span class="viewer-hint-icon">⟳</span>
-          DRAG TO EXPLORE
+          FAITES GLISSER POUR EXPLORER
         </div>
       </div>
     </div>
 
     <!-- Loading indicator -->
     <div class="viewer-loader" id="viewerLoader">
-      <div class="viewer-loader-label">Loading 3D Model</div>
+      <div class="viewer-loader-label">Chargement du modèle 3D</div>
       <div class="viewer-loader-track">
         <div class="viewer-loader-fill" id="viewerLoaderFill"></div>
       </div>
@@ -723,7 +735,7 @@
     loaderEl.classList.remove('viewer-loader--gone');
     if (fillEl) fillEl.style.width = '0%';
     const loaderLbl = loaderEl.querySelector('.viewer-loader-label');
-    if (loaderLbl) loaderLbl.textContent = 'Loading 3D Model';
+    if (loaderLbl) loaderLbl.textContent = 'Chargement du modèle 3D';
 
     disposeModel(carModel);
     carModel = null;
@@ -763,7 +775,7 @@
       err => {
         console.error('GLB load error:', err);
         loading = false;
-        if (loaderLbl) loaderLbl.textContent = 'Model unavailable.';
+        if (loaderLbl) loaderLbl.textContent = 'Modèle indisponible.';
       }
     );
   }

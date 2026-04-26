@@ -89,6 +89,16 @@ nav {
   font-size: 26px;
   letter-spacing: .14em;
   color: #fff;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-logo-img {
+  height: 45px;
+  width: auto;
+  border-radius: 4px;
+  display: block;
 }
 
 .nav-logo em {
@@ -1790,6 +1800,37 @@ nav {
   border-color: var(--accent);
   color: var(--accent);
   background: rgba(255,255,255,.04);
+}
+
+/* ── Headquarters card ─────────────────────── */
+.showroom-card--hq {
+  border-color: rgba(255, 107, 53, .55);
+  background: rgba(255, 107, 53, .05);
+  box-shadow: 0 0 28px rgba(255, 107, 53, .18), inset 0 0 0 1px rgba(255, 107, 53, .12);
+  position: relative;
+}
+
+.showroom-card--hq::before {
+  background: linear-gradient(90deg, transparent, #FF6B35, transparent) !important;
+  opacity: 1 !important;
+}
+
+.showroom-card--hq:hover {
+  box-shadow: 0 0 44px rgba(255, 107, 53, .38), inset 0 0 0 1px rgba(255, 107, 53, .3);
+}
+
+.showroom-hq-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  font-family: 'Space Mono', monospace;
+  font-size: 7px;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: #fff;
+  background: #FF6B35;
+  padding: 4px 8px;
+  clip-path: polygon(0 0, calc(100% - 4px) 0, 100% 4px, 100% 100%, 4px 100%, 0 calc(100% - 4px));
 }
 
 /* Responsive */
