@@ -127,6 +127,14 @@ const INTERIOR_OPTIONS = [
   { name: 'Spec Racing',     icon: '⬡',  desc: 'Préparation arceau FIA, fixations harnais 6 points, baquets racing carbone', price: 7800 },
 ];
 
+const INTERIOR_TYPE_OPTIONS = [
+  { id:'pf', name:'Cuir Pleine Fleur', price:8000  },
+  { id:'np', name:'Cuir Nappa',        price:12000 },
+  { id:'al', name:'Alcantara',          price:10000 },
+  { id:'bc', name:'Bois et Cuir',      price:9000  },
+  { id:'cc', name:'Carbone et Cuir',   price:15000 },
+];
+
 const PERF_OPTIONS = [
   { name: 'Système Launch Control',    desc: 'Séquence de départ arrêté optimisée',                     price: 2100 },
   { name: 'Freins Céramique Composite', desc: 'Disques carbone-céramique, étriers 6 pistons, −18 kg',  price: 6500 },
@@ -158,10 +166,11 @@ const configState = {
   open:        false,
   slideIdx:    -1,
   step:        0,
-  color:       null,
-  wheel:       null,
-  interior:    null,
-  performance: new Set(),
+  color:         null,
+  wheel:         null,
+  interior:      null,
+  interiorType:  null,
+  performance:   new Set(),
 };
 
 // Other modals
@@ -373,8 +382,9 @@ function formatPrice(n) {
 
 function calcTotal() {
   let total = SLIDES[current].basePrice;
-  if (configState.wheel    !== null) total += WHEEL_OPTIONS[configState.wheel].price;
-  if (configState.interior !== null) total += INTERIOR_OPTIONS[configState.interior].price;
+  if (configState.wheel        !== null) total += WHEEL_OPTIONS[configState.wheel].price;
+  if (configState.interior     !== null) total += INTERIOR_OPTIONS[configState.interior].price;
+  if (configState.interiorType !== null) total += INTERIOR_TYPE_OPTIONS[configState.interiorType].price;
   configState.performance.forEach(i => { total += PERF_OPTIONS[i].price; });
   return total;
 }
@@ -423,11 +433,12 @@ function wheelSVG(n) {
 function openConfigurator() {
   if (configState.slideIdx !== current) {
     configState.slideIdx    = current;
-    configState.step        = 0;
-    configState.color       = null;
-    configState.wheel       = null;
-    configState.interior    = null;
-    configState.performance = new Set();
+    configState.step         = 0;
+    configState.color        = null;
+    configState.wheel        = null;
+    configState.interior     = null;
+    configState.interiorType = null;
+    configState.performance  = new Set();
   } else {
     configState.step = 0;
   }
@@ -543,6 +554,8 @@ function renderStep2() {
     <div class="config-section-title">Intérieur</div>
     <div class="config-section-sub">Définissez l'expérience habitacle selon votre style de conduite</div>
     <div class="option-cards" id="interiorCards"></div>
+    <div class="int-type-section-title">TYPE D'INTÉRIEUR</div>
+    <div class="int-type-grid" id="intTypeCards"></div>
     <div class="config-error" id="stepError">Veuillez sélectionner un intérieur pour continuer.</div>`;
   configContent.appendChild(wrap);
 
@@ -564,6 +577,22 @@ function renderStep2() {
       refreshPriceDisplay();
     });
     container.appendChild(card);
+  });
+
+  const typeContainer = document.getElementById('intTypeCards');
+  INTERIOR_TYPE_OPTIONS.forEach((opt, i) => {
+    const card = document.createElement('button');
+    card.type = 'button';
+    card.className = 'int-type-card' + (i === configState.interiorType ? ' active' : '');
+    card.innerHTML =
+      '<span class="int-type-name">' + opt.name + '</span>' +
+      '<span class="int-type-price">+' + formatPrice(opt.price) + '</span>';
+    card.addEventListener('click', () => {
+      configState.interiorType = i;
+      document.querySelectorAll('#intTypeCards .int-type-card').forEach((el, j) => el.classList.toggle('active', j === i));
+      refreshPriceDisplay();
+    });
+    typeContainer.appendChild(card);
   });
 }
 
@@ -601,13 +630,15 @@ function renderStep3() {
 }
 
 function renderStep4() {
-  const s        = SLIDES[current];
-  const color    = configState.color    !== null ? s.colors[configState.color].name : '—';
-  const wheel    = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].name : '—';
-  const interior = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].name : '—';
-  const wheelPx  = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].price : 0;
-  const intPx    = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].price : 0;
-  const total    = calcTotal();
+  const s            = SLIDES[current];
+  const color        = configState.color        !== null ? s.colors[configState.color].name : '—';
+  const wheel        = configState.wheel        !== null ? WHEEL_OPTIONS[configState.wheel].name : '—';
+  const interior     = configState.interior     !== null ? INTERIOR_OPTIONS[configState.interior].name : '—';
+  const interiorType = configState.interiorType !== null ? INTERIOR_TYPE_OPTIONS[configState.interiorType].name : '—';
+  const wheelPx      = configState.wheel        !== null ? WHEEL_OPTIONS[configState.wheel].price : 0;
+  const intPx        = configState.interior     !== null ? INTERIOR_OPTIONS[configState.interior].price : 0;
+  const intTypePx    = configState.interiorType !== null ? INTERIOR_TYPE_OPTIONS[configState.interiorType].price : 0;
+  const total        = calcTotal();
 
   let perfHTML = '';
   if (configState.performance.size === 0) {
@@ -655,6 +686,10 @@ function renderStep4() {
       <div class="summary-row">
         <span class="summary-row-label">${interior}</span>
         <span class="summary-row-value ${intPx > 0 ? 'accent' : ''}">${intPx > 0 ? '+' + formatPrice(intPx) : 'Inclus'}</span>
+      </div>
+      <div class="summary-row">
+        <span class="summary-row-label">Matière : ${interiorType}</span>
+        <span class="summary-row-value ${intTypePx > 0 ? 'accent' : ''}">${intTypePx > 0 ? '+' + formatPrice(intTypePx) : '—'}</span>
       </div>
     </div>
 
@@ -802,21 +837,23 @@ function validateContactForm() {
 ════════════════════════════════════════════════════ */
 function openQuote() {
   const s        = SLIDES[current];
-  const color    = configState.color    !== null ? s.colors[configState.color].name : 'Non sélectionné';
-  const wheel    = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].name : 'Non sélectionné';
-  const interior = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].name : 'Non sélectionné';
-  const perfList = configState.performance.size > 0
+  const color        = configState.color        !== null ? s.colors[configState.color].name : 'Non sélectionné';
+  const wheel        = configState.wheel        !== null ? WHEEL_OPTIONS[configState.wheel].name : 'Non sélectionné';
+  const interior     = configState.interior     !== null ? INTERIOR_OPTIONS[configState.interior].name : 'Non sélectionné';
+  const interiorType = configState.interiorType !== null ? INTERIOR_TYPE_OPTIONS[configState.interiorType].name : 'Non sélectionné';
+  const perfList     = configState.performance.size > 0
     ? [...configState.performance].map(i => PERF_OPTIONS[i].name).join(', ')
     : 'Aucune';
   const total = calcTotal();
 
   const rows = [
-    { label: 'Véhicule',    value: s.lines.join(' ')      },
-    { label: 'Couleur',     value: color                  },
-    { label: 'Jantes',      value: wheel                  },
-    { label: 'Intérieur',   value: interior               },
-    { label: 'Performance', value: perfList               },
-    { label: 'Total',       value: formatPrice(total), accent: true },
+    { label: 'Véhicule',         value: s.lines.join(' ')      },
+    { label: 'Couleur',          value: color                  },
+    { label: 'Jantes',           value: wheel                  },
+    { label: 'Intérieur',        value: interior               },
+    { label: 'Matière intérieur', value: interiorType          },
+    { label: 'Performance',      value: perfList               },
+    { label: 'Total',            value: formatPrice(total), accent: true },
   ];
 
   quoteDetails.innerHTML = rows.map(r => `
@@ -839,11 +876,13 @@ function closeQuote() {
 ════════════════════════════════════════════════════ */
 function downloadConfig() {
   const s        = SLIDES[current];
-  const color    = configState.color    !== null ? s.colors[configState.color].name : 'Non sélectionné';
-  const wheel    = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].name : 'Non sélectionné';
-  const wheelPx  = configState.wheel    !== null ? WHEEL_OPTIONS[configState.wheel].price : 0;
-  const interior = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].name : 'Non sélectionné';
-  const intPx    = configState.interior !== null ? INTERIOR_OPTIONS[configState.interior].price : 0;
+  const color        = configState.color        !== null ? s.colors[configState.color].name : 'Non sélectionné';
+  const wheel        = configState.wheel        !== null ? WHEEL_OPTIONS[configState.wheel].name : 'Non sélectionné';
+  const wheelPx      = configState.wheel        !== null ? WHEEL_OPTIONS[configState.wheel].price : 0;
+  const interior     = configState.interior     !== null ? INTERIOR_OPTIONS[configState.interior].name : 'Non sélectionné';
+  const intPx        = configState.interior     !== null ? INTERIOR_OPTIONS[configState.interior].price : 0;
+  const interiorType = configState.interiorType !== null ? INTERIOR_TYPE_OPTIONS[configState.interiorType].name : 'Non sélectionné';
+  const intTypePx    = configState.interiorType !== null ? INTERIOR_TYPE_OPTIONS[configState.interiorType].price : 0;
   const perfLines = configState.performance.size > 0
     ? [...configState.performance].map(i => `  • ${PERF_OPTIONS[i].name}  (+${formatPrice(PERF_OPTIONS[i].price)})`).join('\n')
     : '  Aucune sélection';
@@ -876,6 +915,7 @@ function downloadConfig() {
   INTÉRIEUR
 ──────────────────────────────────────────────────
   ${interior}${intPx > 0 ? `  (+${formatPrice(intPx)})` : '  (Inclus)'}
+  Matière : ${interiorType}${intTypePx > 0 ? `  (+${formatPrice(intTypePx)})` : ''}
 
 ──────────────────────────────────────────────────
   OPTIONS PERFORMANCE
